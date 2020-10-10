@@ -2,7 +2,7 @@
 
 #### **Team Name:** hay
 
-#### **Application Name:** GameZone
+#### **Application Name:** HayStation
 
 
 ## **<div align="center">Team overview** 
