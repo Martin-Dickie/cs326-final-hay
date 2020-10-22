@@ -1,0 +1,8 @@
+#theGrid {
+    width: 600px;
+    height: 600px;
+    margin: auto;
+    display: grid;
+    grid: repeat(3, auto) / auto-flow;
+    margin-bottom: 3em;
+}
