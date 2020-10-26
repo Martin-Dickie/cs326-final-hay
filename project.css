@@ -1,8 +1,98 @@
-#theGrid {
-    width: 600px;
-    height: 600px;
-    margin: auto;
+* {
+    box-sizing: border-box;
+}
+
+body {
+    padding: 20px;
+    background-image: radial-gradient(farthest-corner at 700px 700px, #f35 0%, yellow 100%), url();
+    font-family: Helvetica, sans-serif;
+    height: 100%;
+}
+
+h1 {
+    text-align: center;
+    font-size: xx-large;
+}
+
+.top {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 3rem;
+    align-self: center;
+}
+
+#login {
+    flex-basis: 10%;
+    margin-right: -10px;
+    text-align: end;
+}
+
+h2 {
+    text-align: center;
+    font-size: medium;
+}
+
+.flex-grid-container {
     display: grid;
-    grid: repeat(3, auto) / auto-flow;
-    margin-bottom: 3em;
+    grid-template-columns: auto auto auto;
+    grid-gap: 10px;
+    padding: 10px;
+    border: 4px solid #dfdfdf;
+    flex-basis: 58%;
+}
+
+.flex-grid-container>div {
+    background-color: rgba(255, 255, 255, 0.8);
+    text-align: center;
+    border-radius: 15px;
+    padding: 20px 0;
+    font-size: 15px;
+}
+
+.leaderboard-grid-container {
+    flex-basis: 18%;
+    display: grid;
+    grid-gap: 10px;
+    padding: 10px;
+    border: 4px solid #dfdfdf;
+}
+
+.leaderboard-grid-container>div {
+    background-color: rgba(255, 255, 255, 0.8);
+    text-align: center;
+    border-radius: 15px;
+    padding: 10px 0;
+    font-size: 15px;
+}
+
+.lobby-grid-container {
+    flex-basis: 18%;
+    display: grid;
+    grid-gap: 10px;
+    padding: 10px;
+    border: 4px solid #dfdfdf;
+}
+
+.lobby-grid-container>div {
+    background-color: rgba(255, 255, 255, 0.8);
+    text-align: center;
+    border-radius: 15px;
+    padding: 20px 0;
+    font-size: 15px;
+}
+
+.columns {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1rem;
+    margin: 2rem;
+}
+
+.headings {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1rem;
+    margin: 2rem;
 }
