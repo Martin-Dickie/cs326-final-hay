@@ -15,6 +15,8 @@
 ## **<div align="center">Wireframes** 
 
 ![main](https://github.com/Martin-Dickie/cs326-final-hay/blob/main/images/wireframe/main.png)
+![lobbies](https://github.com/Martin-Dickie/cs326-final-hay/blob/main/images/wireframe/lobbies.png)
+![games](https://github.com/Martin-Dickie/cs326-final-hay/blob/main/images/wireframe/games.png)
 
 ## **<div align="center">HTML/CSSS mockups**
   
