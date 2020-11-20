@@ -14,5 +14,5 @@
 ## **<div align="center">HTML/CSSS mockups**
   
   
-  
+  ![games.png](https://github.com/Martin-Dickie/cs326-final-hay/blob/main/images/html-mock/games.png)
   
