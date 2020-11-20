@@ -23,3 +23,23 @@
   ![Leaderboards](https://github.com/Martin-Dickie/cs326-final-hay/blob/main/images/html-mock/leaderboards.png)
   ![games.png](https://github.com/Martin-Dickie/cs326-final-hay/blob/main/images/html-mock/games.png)
   ![lobbies.png](https://github.com/Martin-Dickie/cs326-final-hay/blob/main/images/html-mock/lobbies.png)
+  
+  ## **<div align="center"> Divvy of work**
+  
+  <b>Martin</b>
+  
+  * milestone1.md
+  * games.html
+  * games.css
+  * wireframes
+  
+  <b>Anthony</b>
+  * lobbies.html
+  * lobbies.js
+  * lobbies.css
+  * wireframes
+  
+  <b>Shivangi </b>
+  * leaderboards
+  * initial html / css file
+  * wireframes
