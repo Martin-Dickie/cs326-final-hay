@@ -1,5 +1,5 @@
 {
-    "name": "scrabble",
+    "name": "Haystation",
     "type": "module",
     "devDependencies": {
         "eslint": "^7.13.0",
