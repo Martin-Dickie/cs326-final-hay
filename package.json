@@ -2,7 +2,7 @@
     "name": "scrabble",
     "type": "module",
     "devDependencies": {
-        "eslint": "^7.9.0",
+        "eslint": "^7.13.0",
         "http-server": "^0.12.3"
     },
     "scripts": {
@@ -20,7 +20,6 @@
             "ecmaVersion": 12,
             "sourceType": "module"
         },
-        
         "rules": {
             "no-var": "error",
             "eqeqeq": "error",
@@ -37,5 +36,10 @@
                 {}
             ]
         }
+    },
+    "dependencies": {
+        "express": "^4.17.1",
+        "faker": "^5.1.0",
+        "mongo": "^0.1.0"
     }
 }
