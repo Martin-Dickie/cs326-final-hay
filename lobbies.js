@@ -1,6 +1,6 @@
 'use strict';
 
-const url = "https://somethingsomethingsomething.herokuapp.com";
+const url = "https://floating-plateau-01072.herokuapp.com/";
 
 const user = 'test'; // 
 getAndRenderFriendInfo(document.getElementById('friend-table-body'));
@@ -45,7 +45,7 @@ async function getAndRenderFriendInfo(element) {
                             } 
                         });
                         // Re-render friends list:
-                        getAndRenderFriendInfo();
+                        getAndRenderFriendInfo(element);
                     }
                 });
                 element.appendChild(newRow);
