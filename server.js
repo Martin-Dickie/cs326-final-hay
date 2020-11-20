@@ -5,7 +5,11 @@ const app = express();
 app.use(express.json()); // lets you handle JSON input
 app.use(express.static('public')); // lets you serve the client files
 
-const port = 3000;
+let port = process.env.PORT;
+if (port === null || port === "") {
+    port = 8000;
+}
+
 let datastore = {}; // No Mongo yet, just placeholder so lint doesn't evicerate me
 app.get('/', (req, res) => {
     res.sendFile('/project.html');
@@ -13,9 +17,9 @@ app.get('/', (req, res) => {
 
 app.get('/readUser', (req, res) => {
     // Key will be unique user name
-    const k = req.query.key;
+    const k = req.query.name;
     const v = {
-        name: faker.name.findName(),
+        name: k,
         status: faker.lorem.sentence(),
         friends: [faker.name.findName(), faker.name.findName()]
     };
@@ -33,6 +37,10 @@ app.post('/updateUser', (req, res) => {
     const v = req.body["value"];
     datastore['users'][k] = v;
     res.send('Set.');
+});
+
+app.get('/readAllLobbies', (req, res) => {
+    // TODO in Milestone 3
 });
 
 app.get('/readLobby', (req, res) => {
