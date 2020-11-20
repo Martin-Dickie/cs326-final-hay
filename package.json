@@ -1,45 +1,25 @@
 {
-    "name": "Haystation",
-    "type": "module",
-    "devDependencies": {
-        "eslint": "^7.13.0",
-        "http-server": "^0.12.3"
-    },
-    "scripts": {
-        "start": "http-server",
-        "lint": "eslint *.js"
-    },
-    "eslintConfig": {
-        "env": {
-            "browser": true,
-            "es2021": true,
-            "node": true
-        },
-        "extends": "eslint:recommended",
-        "parserOptions": {
-            "ecmaVersion": 12,
-            "sourceType": "module"
-        },
-        "rules": {
-            "no-var": "error",
-            "eqeqeq": "error",
-            "semi": [
-                "error",
-                "always"
-            ],
-            "curly": [
-                "warn",
-                "all"
-            ],
-            "prefer-const": [
-                "warn",
-                {}
-            ]
-        }
-    },
-    "dependencies": {
-        "express": "^4.17.1",
-        "faker": "^5.1.0",
-        "mongo": "^0.1.0"
-    }
+  "name": "cs326-final-hay",
+  "version": "1.0.0",
+  "description": "First version of haystation",
+  "main": "server.js",
+  "directories": {
+    "doc": "docs"
+  },
+  "dependencies": {},
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Martin-Dickie/cs326-final-hay.git"
+  },
+  "author": "Martin Dickie, Anthony Rinaldi, Shivangi Khanna",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Martin-Dickie/cs326-final-hay/issues"
+  },
+  "homepage": "https://github.com/Martin-Dickie/cs326-final-hay#readme"
 }
