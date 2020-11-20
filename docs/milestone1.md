@@ -7,12 +7,17 @@
 
 ## **<div align="center">Data Interaction** 
 
-* 
+* Users
+* Lobbies
+* Games
+* Leaderboards
 
 ## **<div align="center">Wireframes** 
 
+![main](https://github.com/Martin-Dickie/cs326-final-hay/blob/main/images/wireframe/main.png)
+
 ## **<div align="center">HTML/CSSS mockups**
   
-  
+  ![Leaderboards](https://github.com/Martin-Dickie/cs326-final-hay/blob/main/images/html-mock/leaderboards.png)
   ![games.png](https://github.com/Martin-Dickie/cs326-final-hay/blob/main/images/html-mock/games.png)
-  
+  ![lobbies.png](https://github.com/Martin-Dickie/cs326-final-hay/blob/main/images/html-mock/lobbies.png)
