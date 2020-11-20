@@ -1,23 +1,19 @@
-#theGrid {
-    width: 600px;
-    height: 600px;
-    margin: auto;
+.grid-container {
     display: grid;
-    grid: repeat(3, auto) / auto-flow;
-    margin-bottom: 3em;
+    grid-template-columns: repeat(3, auto);
+    grid-gap: 0px;
+    width: 900px
 }
 
 .gradient {
     background-image: radial-gradient(farthest-corner at 700px 700px, #f35 0%, yellow 100%), url();
 }
 
-.lobby-browser {
-    border: 2px solid black;
-    
-    background-color: rgba(255, 255, 255, 0.2);
-}
-
-.friends-list {
+.hay-table {
     border: 2px solid black;
     background-color: rgba(255, 255, 255, 0.2);
+    height: 500px;
+    width: 300px;
+    justify-content: center;
+    align-items: center;
 }
