@@ -9,7 +9,10 @@
   "directories": {
     "doc": "docs"
   },
-  "dependencies": {},
+  "dependencies": {
+    "express": "^4.17.1",
+    "mongodb": "^3.6.3"
+  },
   "devDependencies": {
     "eslint": "^7.11.0",
     "http-server": "^0.12.3"
