@@ -3,6 +3,9 @@
   "version": "1.0.0",
   "description": "First version of haystation",
   "main": "server.js",
+  "engines":{
+    "node": "12.x"
+  },
   "directories": {
     "doc": "docs"
   },
