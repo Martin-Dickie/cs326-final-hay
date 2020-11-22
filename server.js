@@ -34,33 +34,37 @@ app.get('/', (req, res) => {
 
 app.get('/readUser', async (req, res) => {
     // Key will be unique user name
-    const k = req.query.name;
     res.send(JSON.stringify(
-        await client.db("Haystation").collection("Users").find({"name": k}).toArray()
+        await client.db("Haystation").collection("Users").find({"name": req.query.name}).toArray()
     ));
 });
 
 app.get('/deleteUser', async (req, res) => {
-    const k = req.query.key;
     // Delete
-    await client.db("Haystation").collection("Users").deleteOne({"name":k});
+    await client.db("Haystation").collection("Users").deleteOne({"name":req.query.name});
     res.end();
 });
 
 app.post('/createUser', async (req, res) => {
-    const v = req.body["value"];
-    await client.db("Haystation").collection("Users").insertOne(v);
+    await client.db("Haystation").collection("Users").insertOne(req.body);
     res.end();
 });
 
 app.post('/updateUser', async (req, res) => {
-    const k = req.body["key"];
-    const v = req.body["value"];
+    console.log('hmm?');
+    console.log(req.body);
+    console.log(typeof(req.body));
     // Update user with name k to the info stored in v
-    await client.db("Haystation").collection("Users").findAndModify({
-        query: { "name": k },
-        update: v,
-    });
+    await client.db("Haystation").collection("Users").findOneAndUpdate(
+        { "name": req.body.name },
+        {
+            $set: {
+                name: req.body.name,
+                status: req.body.status,
+                friends: req.body.friends
+            }
+        }
+    );
     res.end();
 });
 
@@ -73,24 +77,21 @@ app.get('/readAllLobbies', async (req, res) => {
 
 app.get('/readLobby', async (req, res) => {
     // Key will be the lobby name
-    const k = req.query.key;
     res.send(JSON.stringify(
-        await client.db("Haystation").collection("Lobbies").find({"name": k}).toArray()
+        await client.db("Haystation").collection("Lobbies").find({"name": req.query.key}).toArray()
     ));
 });
 
 app.post('/createLobby', async (req, res) => {
-    const v = req.body["value"];
-    await client.db("Haystation").collection("Lobbies").insertOne(v);
+    await client.db("Haystation").collection("Lobbies").insertOne(req.body);
     res.end();
 });
 
 app.post('/updateLobby', async (req, res) => {
-    const k = req.body["key"];
-    const v = req.body["value"];
-    await client.db("Haystation").collection("Lobbies").findAndModify({
-        query: { "name": k },
-        update: v,
+    console.log(req.body);
+    await client.db("Haystation").collection("Lobbies").findOneAndUpdate({
+        query: { "name": req.body["key"] },
+        update: req.body,
     });
     res.end();
 });
@@ -102,6 +103,7 @@ app.post('/deleteLobby', async (req, res) => {
 });
 
 app.get('*', (req, res) => {
+    // Do nothing
 });
 
 client.connect(err => {

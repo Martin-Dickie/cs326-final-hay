@@ -3,7 +3,26 @@
 const url = "https://floating-plateau-01072.herokuapp.com";
 // const url = "http://localhost:8000";
 
-const user = window.localStorage.getItem("username"); // 
+let user = window.localStorage.getItem("username"); // 
+if (!user) {
+    user = window.prompt("Sign in with your username!");
+    window.localStorage.setItem('username', user);
+}
+
+let userInfo;
+
+async function getUserInfo() {
+    const userInfoResponse = await fetch(url + '/readUser?name='+user);
+    if (userInfoResponse.ok) { 
+        userInfo = await userInfoResponse.json();
+        console.log(userInfo);
+        return userInfo;
+    } else {
+        alert('HTTP-Error: ' + userInfoResponse.status);
+        return -1;
+    }
+}
+
 getAndRenderFriendInfo(document.getElementById('friend-table-body'));
 getAndRenderLobbyInfo(document.getElementById('lobby-browser-table'));
 
@@ -43,60 +62,59 @@ async function createLobby() {
             "Content-type": "application/json; charset=UTF-8"
         } 
     });
+
+    window.alert("Lobby created! Click in the browser to join");
+    getAndRenderLobbyInfo();
 }
 
 async function getAndRenderFriendInfo(element) {
     while (element.firstChild) {
         element.firstChild.remove();
     }
-    const userInfoResponse = await fetch(url + '/readUser?name='+user);
-    if (userInfoResponse.ok) { 
-        const userInfo = await userInfoResponse.json();
-        console.log(userInfo);
-        const friends = JSON.parse(userInfo[0].friends);
-        console.log(friends);
-        for(let i = 0; i < friends.length; i++) {
-            const friendsInfosResponse = await fetch(url + '/readUser?name='+friends.name);
-            if (friendsInfosResponse.ok) { 
-                const friendsInfo = await friendsInfosResponse.json();
+    await getUserInfo();
+    const friends = userInfo[0].friends;
+    if (friends.length === 0) {
+        document.getElementById("friend-header").innerText = "Join a Lobby and Click a User to add a friend";
+    }
+    for(let i = 0; i < friends.length; i++) {
+        console.log("frond?");
+        console.log(friends[i]);
+        // Add friends to page
+        const newRow = document.createElement('tr');
+        newRow.setAttribute('id', `${i}`);
+        const idElement = document.createElement('th');
+        idElement.setAttribute('scope', 'row');
+        idElement.innerText = friends[i].name;
+        const nameElement = document.createElement('td');
+        nameElement.innerText = friends[i].name;
+        const statusElement = document.createElement('td');
+        statusElement.innerText = friends[i].status;
 
-                // Add friends to page
-                const newRow = document.createElement('tr');
-                newRow.setAttribute('id', `${i}`);
-                const idElement = document.createElement('th');
-                idElement.setAttribute('scope', 'row');
-                idElement.innerText = friendsInfo.name;
-                const nameElement = document.createElement('tr');
-                nameElement.innerText = friendsInfo.name;
-                const statusElement = document.createElement('td');
-                statusElement.innerText = friendsInfo.status;
-                newRow.appendChild(nameElement);
-                newRow.appendChild(statusElement);
+        nameElement.classList.add('hay-entry');
+        newRow.appendChild(nameElement);
+        newRow.appendChild(statusElement);
 
-                // Action Listener for Removing Friend
-                newRow.addEventListener('click', function() {
-                    if (confirm('Remove Friend?')) {
-                        // Remove Friend
-                        const updatedUser = JSON.parse(JSON.stringify(userInfo));
-                        updatedUser.friends = userInfo.friends.splice(parseInt(newRow.id), 1);
-                        fetch(url + "/updateUser", {
-                            method: "POST",
-                            body: JSON.stringify(updatedUser), 
-                            headers: { 
-                                "Content-type": "application/json; charset=UTF-8"
-                            } 
-                        });
-                        // Re-render friends list:
-                        getAndRenderFriendInfo(element);
-                    }
+        // Action Listener for Removing Friend
+        newRow.addEventListener('click', async function() {
+            if (confirm('Remove '+ friends[i].name +' as Friend? '+newRow.id)) {
+                const userInfo2 = await getUserInfo();
+                console.log(userInfo2[0]);
+                console.log(newRow.id);
+                userInfo2[0].friends.splice(parseInt(newRow.id), 1);
+                await fetch(url + "/updateUser", {
+                    method: "POST",
+                    body: JSON.stringify(userInfo2[0]), 
+                    headers: { 
+                        "Content-type": "application/json; charset=UTF-8"
+                    } 
                 });
-                element.appendChild(newRow);
-            } else {
-                alert('HTTP-Error: ' + friendsInfosResponse.status);
+                // Re-render friends list:
+                console.log("holy shit what");
+                await getAndRenderFriendInfo(element);
             }
-        }
-    } else {
-        alert('HTTP-Error: ' + userInfoResponse.status);
+        });
+        element.appendChild(newRow);
+        
     }
 }
 
@@ -138,6 +156,24 @@ async function getAndRenderLobbyInfo(element) {
             newRow.appendChild(gameElement);
             newRow.appendChild(statusElement);
             newRow.appendChild(sizeElement);
+            
+            // Action Listener for Joining Lobby
+            // newRow.addEventListener('click', function() {
+            //     if (confirm('Join Lobby')) {
+            //         // Remove Friend
+            //         const updatedUser = JSON.parse(JSON.stringify(userInfo));
+            //         updatedUser.friends = JSON.parse(JSON.stringify(friends.splice(parseInt(newRow.id), 1)));
+            //         fetch(url + "/updateUser", {
+            //             method: "POST",
+            //             body: JSON.stringify(updatedUser), 
+            //             headers: { 
+            //                 "Content-type": "application/json; charset=UTF-8"
+            //             } 
+            //         });
+            //         // Re-render friends list:
+            //         getAndRenderFriendInfo(element);
+            //     }
+            // });
 
             element.appendChild(newRow);
         }
