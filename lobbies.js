@@ -1,10 +1,49 @@
 'use strict';
 
-const url = "https://floating-plateau-01072.herokuapp.com/";
+const url = "https://floating-plateau-01072.herokuapp.com";
+// const url = "http://localhost:8000";
 
-const user = 'test'; // 
+const user = window.localStorage.getItem("username"); // 
 getAndRenderFriendInfo(document.getElementById('friend-table-body'));
 getAndRenderLobbyInfo(document.getElementById('lobby-browser-table'));
+
+document.getElementById('createLobby').addEventListener('click', createLobby);
+
+/*
+*   Prompts the user to create a lobby 
+*   Lobby info:
+*   {
+*       name: string,
+*       game: string,
+*       status: string,
+*       players: number,
+*       maxplayers: number,
+*       users: [user, user....]
+*   };
+*/
+async function createLobby() {
+    const name = prompt("Name of Lobby?");
+    const game = prompt("What Game Will you Be Playing?");
+    const status = 'Waiting for more players...';
+    const players = 0;
+    const maxplayers = prompt("Maximum Number of Players?");
+
+    const newGame = {
+        name: name,
+        game: game,
+        status: status,
+        players: players,
+        maxplayers: maxplayers,
+        users: []
+    };
+    fetch(url + "/createLobby", {
+        method: "POST",
+        body: JSON.stringify(newGame), 
+        headers: { 
+            "Content-type": "application/json; charset=UTF-8"
+        } 
+    });
+}
 
 async function getAndRenderFriendInfo(element) {
     while (element.firstChild) {
@@ -13,8 +52,11 @@ async function getAndRenderFriendInfo(element) {
     const userInfoResponse = await fetch(url + '/readUser?name='+user);
     if (userInfoResponse.ok) { 
         const userInfo = await userInfoResponse.json();
-        for(let i = 0; i < userInfo.friends.length; i++) {
-            const friendsInfosResponse = await fetch(url + '/readUser?name='+userInfo.friends[i].name);
+        console.log(userInfo);
+        const friends = JSON.parse(userInfo[0].friends);
+        console.log(friends);
+        for(let i = 0; i < friends.length; i++) {
+            const friendsInfosResponse = await fetch(url + '/readUser?name='+friends.name);
             if (friendsInfosResponse.ok) { 
                 const friendsInfo = await friendsInfosResponse.json();
 

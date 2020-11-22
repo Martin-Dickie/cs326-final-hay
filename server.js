@@ -2,12 +2,13 @@
 const express = require('express');
 const app = express();
 app.use(express.json()); // lets you handle JSON input
-app.use(express.static('public')); // lets you serve the client files
+app.use(express.static(__dirname + '/')); // lets you serve the client files
 
 let port = process.env.PORT;
-if (port === null || port === "") {
+if (port === null || port === "" || !port) {
     port = 8000;
 }
+console.log(port);
 
 // Assuming your secrets.json contains the following:
 // Username = user
@@ -16,178 +17,97 @@ if (port === null || port === "") {
 let secrets;
 let password;
 if (!process.env.PASSWORD) {
-    secrets = require('secrets.json');
+    secrets = require('./secrets.json');
     password = secrets.password;
 } else {
 	password = process.env.PASSWORD;
 }
 
 const MongoClient = require('mongodb').MongoClient;
-const uri = "mongodb+srv://user:"+password+"@cluster0.bxhm7.mongodb.net/Haystation?retryWrites=true&w=majority";
+// const uri = "mongodb+srv://user:"+password+"@cluster0.bxhm7.mongodb.net/HayStation?retryWrites=true&w=majority";
+const uri = "mongodb+srv://user:"+password+"@cluster0.bxhm7.mongodb.net/HayStation?retryWrites=true&w=majority";
 const client = new MongoClient(uri, { useNewUrlParser: true });
 
 app.get('/', (req, res) => {
-    res.sendFile('/project.html');
+    res.sendFile('./lobbies.html', { root: '.' });
 });
 
-app.get('/readUser', (req, res) => {
+app.get('/readUser', async (req, res) => {
     // Key will be unique user name
     const k = req.query.name;
-    // const v = {
-    //     name: k,
-    //     status: faker.lorem.sentence(),
-    //     friends: [faker.name.findName(), faker.name.findName()]
-    // };
-    client.connect(err => {
-        const collection = client.db("Haystation").collection("Users");
-        if (err) {
-            console.err(err);
-        } else { 
-            res.end(collection.find({
-                name: k
-            }));
-        }
-        client.close();
-    });
+    res.send(JSON.stringify(
+        await client.db("Haystation").collection("Users").find({"name": k}).toArray()
+    ));
 });
 
-app.get('/deleteUser', (req, res) => {
+app.get('/deleteUser', async (req, res) => {
     const k = req.query.key;
     // Delete
-    client.connect(err => {
-        const collection = client.db("Haystation").collection("Users");
-        if (err) {
-            console.err(err);
-        } else { 
-            collection.deleteOne({name:k});
-            res.end();
-        }
-        client.close();
-    });
+    await client.db("Haystation").collection("Users").deleteOne({"name":k});
+    res.end();
 });
 
-app.post('/createUser', (req, res) => {
+app.post('/createUser', async (req, res) => {
     const v = req.body["value"];
-    client.connect(err => {
-        const collection = client.db("Haystation").collection("Users");
-        if (err) {
-            console.err(err);
-        } else { 
-            collection.insertOne(v);
-            res.end();
-        }
-        client.close();
-    });
+    await client.db("Haystation").collection("Users").insertOne(v);
+    res.end();
 });
 
-app.post('/updateUser', (req, res) => {
+app.post('/updateUser', async (req, res) => {
     const k = req.body["key"];
     const v = req.body["value"];
     // Update user with name k to the info stored in v
-    client.connect(err => {
-        const collection = client.db("Haystation").collection("Users");
-        if (err) {
-            console.err(err);
-        } else { 
-            collection.findAndModify({
-                query: { name: k },
-                update: v,
-                });
-            res.end();
-        }
-        client.close();
+    await client.db("Haystation").collection("Users").findAndModify({
+        query: { "name": k },
+        update: v,
     });
+    res.end();
 });
 
-app.get('/readAllLobbies', (req, res) => {
-    // TODO in Milestone 3
-    client.connect(err => {
-        const collection = client.db("Haystation").collection("Lobbies");
-        if (err) {
-            console.err(err);
-        } else { 
-            res.end(JSON.stringify(
-                collection.find({}).toArray().sort((a, b) => b.score - a.score).filter((v, i) => i < 10)
-            ));
-        }
-        client.close();
-    });
+app.get('/readAllLobbies', async (req, res) => {
+    res.send(JSON.stringify(
+        await client.db("Haystation").collection("Lobbies").find().sort({ maxplayers: -1 }).limit(10).toArray()
+    ));
+    
 });
 
-app.get('/readLobby', (req, res) => {
+app.get('/readLobby', async (req, res) => {
     // Key will be the lobby name
     const k = req.query.key;
-    // const v = {
-    //     name: faker.lorem.word(),
-    //     game: faker.commerce.productName(),
-    //     status: 'in game',
-    //     players: 2,
-    //     maxplayers: 10,
-    //     users: [faker.name.findName(), faker.name.findName()]
-    // };
-    client.connect(err => {
-        const collection = client.db("Haystation").collection("Lobbies");
-        if (err) {
-            console.err(err);
-        } else { 
-            res.end(collection.find({
-                name: k,
-            }));
-        }
-        client.close();
-    });
+    res.send(JSON.stringify(
+        await client.db("Haystation").collection("Lobbies").find({"name": k}).toArray()
+    ));
 });
 
-app.post('/createLobby', (req, res) => {
+app.post('/createLobby', async (req, res) => {
     const v = req.body["value"];
-    client.connect(err => {
-        const collection = client.db("Haystation").collection("Lobbies");
-        if (err) {
-            console.err(err);
-        } else { 
-            collection.insertOne(v);
-            res.end();
-        }
-        client.close();
-    });
+    await client.db("Haystation").collection("Lobbies").insertOne(v);
+    res.end();
 });
 
-app.post('/updateLobby', (req, res) => {
+app.post('/updateLobby', async (req, res) => {
     const k = req.body["key"];
     const v = req.body["value"];
-    client.connect(err => {
-        const collection = client.db("Haystation").collection("Lobbies");
-        if (err) {
-            console.err(err);
-        } else { 
-            collection.findAndModify({
-                query: { name: k },
-                update: v,
-                });
-            res.end();
-        }
-        client.close();
+    await client.db("Haystation").collection("Lobbies").findAndModify({
+        query: { "name": k },
+        update: v,
     });
+    res.end();
 });
 
-app.post('/deleteLobby', (req, res) => {
+app.post('/deleteLobby', async (req, res) => {
     const k = req.query.key;
-    // Delete
-    client.connect(err => {
-        const collection = client.db("Haystation").collection("Lobbies");
-        if (err) {
-            console.err(err);
-        } else { 
-            collection.deleteOne({name:k});
-            res.end();
-        }
-        client.close();
-    });
+    await client.db("Haystation").collection("Lobbies").deleteOne({"name":k});
+    res.end();
 });
 
 app.get('*', (req, res) => {
 });
 
-app.listen(port, () => {
-    console.log(`Example app listening at http://localhost:${port}`);
+client.connect(err => {
+    if (err) {
+        console.error(err);
+    } else {
+        app.listen(process.env.PORT || 8000);
+    }
 });
