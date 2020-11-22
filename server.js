@@ -54,7 +54,6 @@ app.post('/updateUser', async (req, res) => {
     console.log('hmm?');
     console.log(req.body);
     console.log(typeof(req.body));
-    // Update user with name k to the info stored in v
     await client.db("Haystation").collection("Users").findOneAndUpdate(
         { "name": req.body.name },
         {
@@ -87,12 +86,32 @@ app.post('/createLobby', async (req, res) => {
     res.end();
 });
 
+/*
+*   Lobby: {
+        name,
+        game,
+        status,
+        players,
+        maxplayers,
+        users,
+    }
+*/
 app.post('/updateLobby', async (req, res) => {
+    console.log('hmmL?');
     console.log(req.body);
-    await client.db("Haystation").collection("Lobbies").findOneAndUpdate({
-        query: { "name": req.body["key"] },
-        update: req.body,
-    });
+    await client.db("Haystation").collection("Users").findOneAndUpdate(
+        { "name": req.body.name },
+        {
+            $set: {
+                name: req.body.name,
+                game: req.body.game,
+                status: req.body.status,
+                players: req.body.players,
+                maxplayers: req.body.maxplayers,
+                users: req.body.users
+            }
+        }
+    );
     res.end();
 });
 

@@ -1,5 +1,7 @@
 'use strict';
 
+const { ObjectId } = require("mongodb");
+
 const url = "https://floating-plateau-01072.herokuapp.com";
 // const url = "http://localhost:8000";
 
@@ -11,8 +13,8 @@ if (!user) {
 
 let userInfo;
 
-async function getUserInfo() {
-    const userInfoResponse = await fetch(url + '/readUser?name='+user);
+async function getUserInfo(name) {
+    const userInfoResponse = await fetch(url + '/readUser?name='+name);
     if (userInfoResponse.ok) { 
         userInfo = await userInfoResponse.json();
         console.log(userInfo);
@@ -26,7 +28,6 @@ async function getUserInfo() {
 getAndRenderFriendInfo(document.getElementById('friend-table-body'));
 getAndRenderLobbyInfo(document.getElementById('lobby-browser-table'));
 
-document.getElementById('createLobby').addEventListener('click', createLobby);
 
 /*
 *   Prompts the user to create a lobby 
@@ -40,7 +41,7 @@ document.getElementById('createLobby').addEventListener('click', createLobby);
 *       users: [user, user....]
 *   };
 */
-async function createLobby() {
+document.getElementById('createLobby').addEventListener('click', async function () {
     const name = prompt("Name of Lobby?");
     const game = prompt("What Game Will you Be Playing?");
     const status = 'Waiting for more players...';
@@ -48,6 +49,7 @@ async function createLobby() {
     const maxplayers = prompt("Maximum Number of Players?");
 
     const newGame = {
+        _id: ObjectId(),
         name: name,
         game: game,
         status: status,
@@ -55,7 +57,7 @@ async function createLobby() {
         maxplayers: maxplayers,
         users: []
     };
-    fetch(url + "/createLobby", {
+    await fetch(url + "/createLobby", {
         method: "POST",
         body: JSON.stringify(newGame), 
         headers: { 
@@ -64,14 +66,48 @@ async function createLobby() {
     });
 
     window.alert("Lobby created! Click in the browser to join");
-    getAndRenderLobbyInfo();
-}
+    await getAndRenderLobbyInfo(document.getElementById('lobby-browser'));
+});
+/*
+*   Leaves current Lobby
+*/
+document.getElementById('leaveLobby').addEventListener('click', async function () {
+    if (confirm("Leave Lobby?")) {
+        const allLobbyInfoResponse = await fetch(url + '/readAllLobbies');
+        if (allLobbyInfoResponse.ok) { 
+            const allLobbyInfo = await allLobbyInfoResponse.json();
+            let lobby;
+            for (let i = 0; i < allLobbyInfo.length; i++) {
+                for (let j; j < allLobbyInfo[i].users.length; j++) {
+                    if (allLobbyInfo[i].users[j].name === user) {
+                        lobby = allLobbyInfo[i];
+                        lobby.players -= 1;
+                        lobby.users.pop(j);
+                        break;
+                    }
+                }
+            }
+            await fetch(url + "/updateLobby", {
+                method: "POST",
+                body: JSON.stringify(lobby), 
+                headers: { 
+                    "Content-type": "application/json; charset=UTF-8"
+                } 
+            });
+
+            window.alert("You have left the lobby!");
+            await getAndRenderLobbyInfo(document.getElementById('lobby-browser'));
+            await getAndRenderCurrentLobby(document.getElementById('current-lobby'));
+        }
+    }
+});
+
 
 async function getAndRenderFriendInfo(element) {
     while (element.firstChild) {
         element.firstChild.remove();
     }
-    await getUserInfo();
+    await getUserInfo(user);
     const friends = userInfo[0].friends;
     if (friends.length === 0) {
         document.getElementById("friend-header").innerText = "Join a Lobby and Click a User to add a friend";
@@ -97,7 +133,7 @@ async function getAndRenderFriendInfo(element) {
         // Action Listener for Removing Friend
         newRow.addEventListener('click', async function() {
             if (confirm('Remove '+ friends[i].name +' as Friend? '+newRow.id)) {
-                const userInfo2 = await getUserInfo();
+                const userInfo2 = await getUserInfo(user);
                 console.log(userInfo2[0]);
                 console.log(newRow.id);
                 userInfo2[0].friends.splice(parseInt(newRow.id), 1);
@@ -124,7 +160,7 @@ async function getAndRenderFriendInfo(element) {
         name,
         game,
         status,
-        player,
+        players,
         maxplayers,
         users,
     }
@@ -140,6 +176,7 @@ async function getAndRenderLobbyInfo(element) {
             // Add lobby to page
             const newRow = document.createElement('tr');
             const idElement = document.createElement('th');
+            newRow.setAttribute('id', `${i}`);
             idElement.setAttribute('scope', 'row');
             idElement.innerText = i;
             const nameElement = document.createElement('td');
@@ -158,26 +195,87 @@ async function getAndRenderLobbyInfo(element) {
             newRow.appendChild(sizeElement);
             
             // Action Listener for Joining Lobby
-            // newRow.addEventListener('click', function() {
-            //     if (confirm('Join Lobby')) {
-            //         // Remove Friend
-            //         const updatedUser = JSON.parse(JSON.stringify(userInfo));
-            //         updatedUser.friends = JSON.parse(JSON.stringify(friends.splice(parseInt(newRow.id), 1)));
-            //         fetch(url + "/updateUser", {
-            //             method: "POST",
-            //             body: JSON.stringify(updatedUser), 
-            //             headers: { 
-            //                 "Content-type": "application/json; charset=UTF-8"
-            //             } 
-            //         });
-            //         // Re-render friends list:
-            //         getAndRenderFriendInfo(element);
-            //     }
-            // });
-
+            newRow.addEventListener('click', async function() {
+                if (confirm('Join '+ allLobbyInfo[newRow.id].name +'? '+newRow.id)) {
+                    allLobbyInfo[newRow.id].players += 1;
+                    allLobbyInfo[newRow.id].users.push(user);
+                    await fetch(url + "/updateLobby", {
+                        method: "POST",
+                        body: JSON.stringify(allLobbyInfo[newRow.id]), 
+                        headers: { 
+                            "Content-type": "application/json; charset=UTF-8"
+                        } 
+                    });
+                    await getAndRenderCurrentLobby(document.getElementById('current-lobby'));
+                }
+            });
             element.appendChild(newRow);
         }
     } else {
         alert('HTTP-Error: ' + allLobbyInfoResponse.status);
+    }
+}
+
+
+
+async function getAndRenderCurrentLobby(element) {
+    while (element.firstChild) {
+        element.firstChild.remove();
+    }
+    const lobby = await getCurrentLobby();
+    const users = lobby.users;
+    
+    for(let i = 0; i < users.length; i++) {
+        // Add lobby to page
+        const newRow = document.createElement('tr');
+        const idElement = document.createElement('th');
+        newRow.setAttribute('id', `${i}`);
+        idElement.setAttribute('scope', 'row');
+        idElement.innerText = i;
+        const nameElement = document.createElement('td');
+        nameElement.innerText = users[i].name;
+
+        newRow.appendChild(idElement);
+        newRow.appendChild(nameElement);
+        
+        // Action Listener for Adding Friend
+        newRow.addEventListener('click', async function() {
+            if (confirm('Add '+ users[newRow.id].name +' as a friend? '+newRow.id)) {
+                const me = await getUserInfo(user);
+                const newFriend = await getUserInfo(users[newRow.id].name);
+                me.friends.push({
+                    name: newFriend.name,
+                    status: newFriend.status,
+                    _id: newFriend._id
+                });
+                await fetch(url + "/updateUser", {
+                    method: "POST",
+                    body: JSON.stringify(me), 
+                    headers: { 
+                        "Content-type": "application/json; charset=UTF-8"
+                    } 
+                });
+                await getAndRenderCurrentLobby(element);
+            }
+        });
+        element.appendChild(newRow);
+    }
+}
+
+
+async function getCurrentLobby() {
+    const allLobbyInfoResponse = await fetch(url + '/readAllLobbies');
+    if (allLobbyInfoResponse.ok) { 
+        const allLobbyInfo = await allLobbyInfoResponse.json();
+        for (let i = 0; i < allLobbyInfo.length; i++) {
+            for (let j; j < allLobbyInfo[i].users.length; j++) {
+                if (allLobbyInfo[i].users[j].name === user) {
+                    return allLobbyInfo[i];
+                }
+            }
+        }
+        return -1;
+    } else {
+        return -1;
     }
 }
