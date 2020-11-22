@@ -17,7 +17,6 @@ async function getUserInfo(name) {
     const userInfoResponse = await fetch(url + '/readUser?name='+name);
     if (userInfoResponse.ok) { 
         userInfo = await userInfoResponse.json();
-        console.log(userInfo);
         return userInfo;
     } else {
         alert('HTTP-Error: ' + userInfoResponse.status);
@@ -113,8 +112,6 @@ async function getAndRenderFriendInfo(element) {
         document.getElementById("friend-header").innerText = "Join a Lobby and Click a User to add a friend";
     }
     for(let i = 0; i < friends.length; i++) {
-        console.log("frond?");
-        console.log(friends[i]);
         // Add friends to page
         const newRow = document.createElement('tr');
         newRow.setAttribute('id', `${i}`);
@@ -134,8 +131,6 @@ async function getAndRenderFriendInfo(element) {
         newRow.addEventListener('click', async function() {
             if (confirm('Remove '+ friends[i].name +' as Friend? '+newRow.id)) {
                 const userInfo2 = await getUserInfo(user);
-                console.log(userInfo2[0]);
-                console.log(newRow.id);
                 userInfo2[0].friends.splice(parseInt(newRow.id), 1);
                 await fetch(url + "/updateUser", {
                     method: "POST",
@@ -145,7 +140,6 @@ async function getAndRenderFriendInfo(element) {
                     } 
                 });
                 // Re-render friends list:
-                console.log("holy shit what");
                 await getAndRenderFriendInfo(element);
             }
         });

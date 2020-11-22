@@ -8,7 +8,6 @@ let port = process.env.PORT;
 if (port === null || port === "" || !port) {
     port = 8000;
 }
-console.log(port);
 
 // Assuming your secrets.json contains the following:
 // Username = user
@@ -51,9 +50,6 @@ app.post('/createUser', async (req, res) => {
 });
 
 app.post('/updateUser', async (req, res) => {
-    console.log('hmm?');
-    console.log(req.body);
-    console.log(typeof(req.body));
     await client.db("Haystation").collection("Users").findOneAndUpdate(
         { "name": req.body.name },
         {
@@ -97,8 +93,6 @@ app.post('/createLobby', async (req, res) => {
     }
 */
 app.post('/updateLobby', async (req, res) => {
-    console.log('hmmL?');
-    console.log(req.body);
     await client.db("Haystation").collection("Users").findOneAndUpdate(
         { "name": req.body.name },
         {
