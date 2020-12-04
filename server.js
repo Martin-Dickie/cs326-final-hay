@@ -31,6 +31,10 @@ app.get('/', (req, res) => {
     res.sendFile('./lobbies.html', { root: '.' });
 });
 
+app.get('/games',(req,res) => {
+    res.sendFile('./games.html', {root: '.'});
+});
+
 app.get('/readUser', async (req, res) => {
     // Key will be unique user name
     res.send(JSON.stringify(
