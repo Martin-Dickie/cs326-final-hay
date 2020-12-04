@@ -74,9 +74,11 @@ function renderGames(){
             gameInfoPopup.classList.add('popuptext');
             gameInfoPopup.setAttribute('id', currentGame.name + ".popup");
             gameInfoPopup.innerHTML = currentGame.name;
+
             
+            websiteButton.innerText = "Website";
             const websiteButton = document.createElement('a');
-            websiteButton.setAttribute('id', currentGame.name + ".button_test");
+            websiteButton.setAttribute('id', currentGame.name + ".website_button");
             websiteButton.setAttribute('type', 'button');
             websiteButton.classList.add("btn", "btn-secondary");
             websiteButton.addEventListener('click', () => {
@@ -84,7 +86,17 @@ function renderGames(){
             });
             websiteButton.innerText = "Website";
 
+            const lobbyButton = document.createElement('a');
+            lobbyButton.setAttribute('id', currentGame.name + ".lobby_button");
+            lobbyButton.setAttribute('type', 'button');
+            lobbyButton.classList.add("btn", "btn-secondary");
+            lobbyButton.addEventListener('click', () => {
+                location.assign('https://floating-plateau-01072.herokuapp.com/');
+            });
+            lobbyButton.innerText = "Find Lobby";
+
             gameInfoPopup.appendChild(websiteButton);
+            gameInfoPopup.appendChild(lobbyButton);
             gameTile.appendChild(gameInfo);
             gameTile.setAttribute('id', currentGame.name + ".gameTile");
             gameTile.appendChild(gameInfoPopup);
