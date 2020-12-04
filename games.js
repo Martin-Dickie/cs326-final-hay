@@ -58,8 +58,11 @@ function renderGames(){
     for(let i = 0; i < window.games.length/3; ++i){
         const row = document.createElement('div');
         row.classList.add('row');
-        row.setAttribute('id',"row " + i+1);
+        row.setAttribute('id',"row " + (i+1));
         for(let j = 0; j < 3; ++j){
+            if(counter >= window.games.length){
+                break;
+            }
             const currentGame = window.games[counter].data;
             const gameTile = document.createElement('div');
             gameTile.classList.add('col');
@@ -67,11 +70,39 @@ function renderGames(){
             gameInfo.setAttribute('src', currentGame.header_image);
             gameInfo.setAttribute('id', currentGame.name + ".gameInfo");
             gameInfo.setAttribute('alt', currentGame.name);
+            const gameInfoPopup = document.createElement('span');
+            gameInfoPopup.classList.add('popuptext');
+            gameInfoPopup.setAttribute('id', currentGame.name + ".popup");
+            gameInfoPopup.innerHTML = currentGame.name;
+            
+            const websiteButton = document.createElement('a');
+            websiteButton.setAttribute('id', currentGame.name + ".button_test");
+            websiteButton.setAttribute('type', 'button');
+            websiteButton.classList.add("btn", "btn-secondary");
+            websiteButton.addEventListener('click', () => {
+                location.assign(currentGame.website);
+            });
+            websiteButton.innerText = "Website";
+
+            gameInfoPopup.appendChild(websiteButton);
             gameTile.appendChild(gameInfo);
             gameTile.setAttribute('id', currentGame.name + ".gameTile");
+            gameTile.appendChild(gameInfoPopup);
+            gameTile.classList.add('popup');
+            gameTile.addEventListener('click', () => {
+                drawPopup(currentGame.name + ".popup");
+            });
+
             row.appendChild(gameTile);
+
             counter++;
         }
         gameGrid.appendChild(row);
     }
+}
+
+function drawPopup(name){
+    console.log("clicked");
+    const popup = document.getElementById(name);
+    popup.classList.toggle('show');
 }
