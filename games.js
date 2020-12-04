@@ -32,3 +32,19 @@ async function makegameDB() {
 
     }
 }
+
+window.onload = initialize;
+function initialize(){
+    loadGames();
+    renderGames();
+
+}
+
+
+async function loadGames(){
+    const loadGamesCall = await fetch("gamesDB.json");
+    if(loadGamesCall.ok){
+        games = await loadGamesCall.json();
+        window.games = games;
+    }
+}
