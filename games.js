@@ -76,7 +76,6 @@ function renderGames(){
             gameInfoPopup.innerHTML = currentGame.name;
 
             
-            websiteButton.innerText = "Website";
             const websiteButton = document.createElement('a');
             websiteButton.setAttribute('id', currentGame.name + ".website_button");
             websiteButton.setAttribute('type', 'button');
