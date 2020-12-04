@@ -1,22 +1,12 @@
 .grid-container {
-    width: 600px;
-    height: 600px;
+    min-width: 600px;
+    max-width: relative;
+    min-height: 600px;
+    max-height: relative;
     margin: auto;
     display: grid;
     grid: repeat(3, auto) / auto-flow;
     margin-bottom: 3em;
-}
-.game-grid{
-    width: 630px;
-    height: 650px;
-    margin: auto;
-    display: grid;
-    grid-template-columns: repeat(4,auto); 
-    background-color:red;
-    border-style:solid;
-    border-width: 5px;
-    grid-gap: 2px;
-    margin-top: 5px;
 }
 
 
@@ -31,9 +21,9 @@ img{
 .row{
     column-gap: auto;
     max-width:800px;
-    max-height:200px;
-    width: 50%;
-    height: 50%;
+    max-height:400px;
+    width: 100%;
+    height: 100%;
     margin-bottom:5px;
 }
 .col{
