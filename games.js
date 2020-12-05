@@ -49,16 +49,22 @@ function renderGames() {
             }
             const currentGame = window.games[counter].data; // currentGame 
             const gameTile = document.createElement('div');
+            // Make a gameTile which holds all the game information and popup information
             gameTile.classList.add('col');
+            
+            // Game info is the image and data
             const gameInfo = document.createElement('img');
             gameInfo.setAttribute('src', currentGame.header_image);
             gameInfo.setAttribute('id', currentGame.name + ".gameInfo");
             gameInfo.setAttribute('alt', currentGame.name);
+
+            // Game info Popup is for when you click on the game image it will popup with additional things inside
             const gameInfoPopup = document.createElement('span');
             gameInfoPopup.classList.add('popuptext');
             gameInfoPopup.setAttribute('id', currentGame.name + ".popup");
             gameInfoPopup.innerHTML = currentGame.name;
 
+            // createLobbyButton is a button in the popup to create a lobby for the specified game
             const createLobbyButton = document.createElement('a');
             createLobbyButton.setAttribute('id', currentGame.name + ".lobby_button");
             createLobbyButton.setAttribute('type', 'button');
@@ -69,7 +75,7 @@ function renderGames() {
                 const status = 'Waiting for more players...';
                 const players = 0;
                 const maxplayers = prompt("Maximum Number of Players?");
-
+                // Make a new game with the given information, and game set as the current game
                 const newGame = {
                     name: name,
                     game: game,
@@ -91,6 +97,7 @@ function renderGames() {
             });
             createLobbyButton.innerText = "Create lobby";
 
+            // Button inside the popup to link to the game's website, via the website field of steam json items.
             const websiteButton = document.createElement('a');
             websiteButton.setAttribute('id', currentGame.name + ".website_button");
             websiteButton.setAttribute('type', 'button');
@@ -100,6 +107,7 @@ function renderGames() {
             });
             websiteButton.innerText = "Website";
 
+            // find lobby just brings you to the lobby page, to find lobbies. Currently does not sort by game or anything
             const findLobbyButton = document.createElement('a');
             findLobbyButton.setAttribute('id', currentGame.name + ".lobby_button");
             findLobbyButton.setAttribute('type', 'button');
@@ -109,15 +117,16 @@ function renderGames() {
             });
             findLobbyButton.innerText = "Find Lobby";
 
+            // container to hold all the buttons to look a little nicer
             const popupContainer = document.createElement('div');
-            //popupContainer.classList.add('row');
             popupContainer.setAttribute('id', currentGame.name + ".popup_container");
-
+            // add all the buttons to container
             popupContainer.appendChild(websiteButton);
             popupContainer.appendChild(findLobbyButton);
             popupContainer.appendChild(createLobbyButton);
-
+            // add container to the popup
             gameInfoPopup.appendChild(popupContainer);
+            // add the gameInfo to the tile
             gameTile.appendChild(gameInfo);
             gameTile.setAttribute('id', currentGame.name + ".gameTile");
             gameTile.appendChild(gameInfoPopup);
@@ -127,13 +136,13 @@ function renderGames() {
             });
 
             row.appendChild(gameTile);
-
-            counter++;
+            counter++; // increment game counter
         }
         gameGrid.appendChild(row);
     }
 }
 
+// pops up the clicked game, and removes the previous popups
 function drawPopup(name) {
     console.log("clicked");
     const allPopups = document.getElementsByClassName('show');
