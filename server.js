@@ -97,25 +97,14 @@ app.post('/createLobby', async (req, res) => {
     }
 */
 app.post('/updateLobby', async (req, res) => {
-    await client.db("Haystation").collection("Users").findOneAndUpdate(
-        { "name": req.body.name },
-        {
-            $set: {
-                name: req.body.name,
-                game: req.body.game,
-                status: req.body.status,
-                players: req.body.players,
-                maxplayers: req.body.maxplayers,
-                users: req.body.users
-            }
-        }
-    );
+    console.log(req.body);
+    await client.db("Haystation").collection("Lobbies").deleteOne({"name":req.body.name});
+    await client.db("Haystation").collection("Lobbies").insertOne(req.body);
     res.end();
 });
 
 app.post('/deleteLobby', async (req, res) => {
-    const k = req.query.key;
-    await client.db("Haystation").collection("Lobbies").deleteOne({"name":k});
+    await client.db("Haystation").collection("Users").deleteOne({"name":req.query.name});
     res.end();
 });
 

@@ -1,7 +1,7 @@
 'use strict';
 
-const url = "https://floating-plateau-01072.herokuapp.com";
-// const url = "http://localhost:8000";
+// const url = "https://floating-plateau-01072.herokuapp.com";
+const url = "http://localhost:8000";
 
 let user = window.localStorage.getItem("username"); // 
 if (!user) {
@@ -12,7 +12,12 @@ if (!user) {
 let userInfo;
 
 async function getUserInfo(name) {
-    const userInfoResponse = await fetch(url + '/readUser?name='+name);
+    const userInfoResponse = await fetch(url + '/readUser?name='+name, {
+        method: "GET",
+        headers: { 
+            "Content-type": "application/json; charset=UTF-8"
+        }
+    });
     if (userInfoResponse.ok) { 
         userInfo = await userInfoResponse.json();
         return userInfo;
@@ -62,7 +67,7 @@ document.getElementById('createLobby').addEventListener('click', async function 
     });
 
     window.alert("Lobby created! Click in the browser to join");
-    await getAndRenderLobbyInfo(document.getElementById('lobby-browser'));
+    await getAndRenderLobbyInfo(document.getElementById('lobby-browser-table'));
 });
 
 /*
@@ -70,13 +75,18 @@ document.getElementById('createLobby').addEventListener('click', async function 
 */
 document.getElementById('leaveLobby').addEventListener('click', async function () {
     if (confirm("Leave Lobby?")) {
-        const allLobbyInfoResponse = await fetch(url + '/readAllLobbies');
+        const allLobbyInfoResponse = await fetch(url + '/readAllLobbies', {
+            method: "GET",
+            headers: { 
+                "Content-type": "application/json; charset=UTF-8"
+            }
+        });
         if (allLobbyInfoResponse.ok) { 
             const allLobbyInfo = await allLobbyInfoResponse.json();
             let lobby = -1;
             for (let i = 0; i < allLobbyInfo.length; i++) {
-                for (let j; j < allLobbyInfo[i].users.length; j++) {
-                    if (allLobbyInfo[i].users[j].name === user) {
+                for (let j = 0; j < allLobbyInfo[i].users.length; j++) {
+                    if (allLobbyInfo[i].users[j] === user) {
                         lobby = allLobbyInfo[i];
                         lobby.players -= 1;
                         lobby.users.pop(j);
@@ -86,6 +96,7 @@ document.getElementById('leaveLobby').addEventListener('click', async function (
             }
             if(lobby === -1) {
                 window.alert("You can't leave a lobby when you're not in one!");
+                return;
             }
             await fetch(url + "/updateLobby", {
                 method: "POST",
@@ -96,8 +107,8 @@ document.getElementById('leaveLobby').addEventListener('click', async function (
             });
 
             window.alert("You have left the lobby!");
-            await getAndRenderLobbyInfo(document.getElementById('lobby-browser'));
-            await getAndRenderCurrentLobby(document.getElementById('current-lobby'));
+            await getAndRenderLobbyInfo(document.getElementById('lobby-browser-table'));
+            await getAndRenderCurrentLobby(document.getElementById('current-lobby-table'));
         }
     }
 });
@@ -164,7 +175,12 @@ async function getAndRenderLobbyInfo(element) {
     while (element.firstChild) {
         element.firstChild.remove();
     }
-    const allLobbyInfoResponse = await fetch(url + '/readAllLobbies');
+    const allLobbyInfoResponse = await fetch(url + '/readAllLobbies', {
+        method: "GET",
+        headers: { 
+            "Content-type": "application/json; charset=UTF-8"
+        }
+    });
     if (allLobbyInfoResponse.ok) { 
         const allLobbyInfo = await allLobbyInfoResponse.json();
         for(let i = 0; i < allLobbyInfo.length; i++) {
@@ -201,7 +217,8 @@ async function getAndRenderLobbyInfo(element) {
                             "Content-type": "application/json; charset=UTF-8"
                         } 
                     });
-                    await getAndRenderCurrentLobby(document.getElementById('current-lobby'));
+                    await getAndRenderLobbyInfo(document.getElementById('lobby-browser-table'));
+                    await getAndRenderCurrentLobby(document.getElementById('current-lobby-table'));
                 }
             });
             element.appendChild(newRow);
@@ -219,7 +236,6 @@ async function getAndRenderCurrentLobby(element) {
     }
     const lobby = await getCurrentLobby();
     const users = lobby.users;
-    
     for(let i = 0; i < users.length; i++) {
         // Add lobby to page
         const newRow = document.createElement('tr');
@@ -228,16 +244,16 @@ async function getAndRenderCurrentLobby(element) {
         idElement.setAttribute('scope', 'row');
         idElement.innerText = i;
         const nameElement = document.createElement('td');
-        nameElement.innerText = users[i].name;
+        nameElement.innerText = users[i];
 
         newRow.appendChild(idElement);
         newRow.appendChild(nameElement);
         
         // Action Listener for Adding Friend
         newRow.addEventListener('click', async function() {
-            if (confirm('Add '+ users[newRow.id].name +' as a friend? '+newRow.id)) {
+            if (confirm('Add '+ users[newRow.id] +' as a friend? '+newRow.id)) {
                 const me = await getUserInfo(user);
-                const newFriend = await getUserInfo(users[newRow.id].name);
+                const newFriend = await getUserInfo(users[newRow.id]);
                 me.friends.push({
                     name: newFriend.name,
                     status: newFriend.status,
@@ -259,12 +275,17 @@ async function getAndRenderCurrentLobby(element) {
 
 
 async function getCurrentLobby() {
-    const allLobbyInfoResponse = await fetch(url + '/readAllLobbies');
+    const allLobbyInfoResponse = await fetch(url + '/readAllLobbies', {
+        method: "GET",
+        headers: { 
+            "Content-type": "application/json; charset=UTF-8"
+        }
+    });
     if (allLobbyInfoResponse.ok) { 
         const allLobbyInfo = await allLobbyInfoResponse.json();
         for (let i = 0; i < allLobbyInfo.length; i++) {
-            for (let j; j < allLobbyInfo[i].users.length; j++) {
-                if (allLobbyInfo[i].users[j].name === user) {
+            for (let j = 0; j < allLobbyInfo[i].users.length; j++) {
+                if (allLobbyInfo[i].users[j] === user) {
                     return allLobbyInfo[i];
                 }
             }
