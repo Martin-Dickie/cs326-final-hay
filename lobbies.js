@@ -338,5 +338,6 @@ async function getCurrentLobby() {
     } else {
         // Error
         alert('HTTP-Error: ' + allLobbyInfoResponse.status);
+        return -1;
     }
 }
