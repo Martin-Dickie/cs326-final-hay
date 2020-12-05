@@ -110,7 +110,7 @@ function renderGames() {
             findLobbyButton.innerText = "Find Lobby";
 
             const popupContainer = document.createElement('div');
-            popupContainer.classList.add('row');
+            //popupContainer.classList.add('row');
             popupContainer.setAttribute('id', currentGame.name + ".popup_container");
 
             popupContainer.appendChild(websiteButton);
