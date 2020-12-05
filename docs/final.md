@@ -61,9 +61,15 @@ The goal with these collections is specify all the information a user would need
 The "Games" collection has documents populated from Steam's game data API, with one document per game.
 
 #### **URL Routes/Mappings:**
+There are three URL routes specified in the server.js file. "/" directs to games.html to be the default page for the site, and the two buttons "Games" and "Lobbies" link to games.html and lobbies.html, respectively.  
 
 #### **Authentication/Authorization:**
+Users are Authenticated by their username, entered through a window prompt as shown in the video. There is a validation function that checks to see if this is a user already in the database, and if not will prompt the user for a status and make their account (database entry). There are no special permissions for any particular users, and the users are able to log back with ease using the browser local storage, or by entering their username if prompted again (if the storage is cleared).
 
 #### **Division of Labor:**
+* Anthony: all work with the "lobbies" HTML, JS, and initial CSS file. Programmed all the website backend, and the database setup/logic.
+* Martin: all work with the "games" HTML, JS, and initial CSS files. 
+* Shivangi: CSS wizard, revised the two CSS files to include the word-art title and the colored buttons
 
 #### **Conclusion:**
+We had a lot of fun in the initial phases of the project and had a lot of great ideas for how we wanted the website to turn out. Unfortunately those goals were a bit too much (in hindsight they were obviously too much for an intro to web programming class), and we settled on more baseline functionality for the app using the big topics and technologies we discussed in class. We realized this mostly after milestone 1 when we got to the implementation phase and the goal of having a full chat and leaderboard system seemed farther away. From there, we settled on having three main functionalities: a games list, a lobby browser, and friends. These achieve the main goal of the app -- to provide a convienient way to organize multiplayer games with your friends -- without the lofty goals we previously had in mind. There were a lot of technical difficulties to overcome along the way, for example, using git with multiple people was difficult at times when the "auto-merge" feature would start (like during a specific pull) and cause a lot of errors in the next push as well as in VS Code's git integration that we didn't fully understand. In addition, the DOM manipulation in the lobbies.html page took a lot of difficult work to get working as intended and display every entry correctly. There's no particular topic or bit of information that we didn't know that we wish we would've known, but we do wish we could've gotten more practice with MongoDB setup.
