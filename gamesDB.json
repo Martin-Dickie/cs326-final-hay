@@ -1996,8 +1996,8 @@
                     "description": "Single-player"
                 },
                 {
-                    "id": 1,
-                    "description": "Multi-player"
+                    "name": "One Way Trip",
+                    "path": "https://steamcdn-a.akamaihd.net/steamcommunity/public/images/apps/408900/8c2b4af5c01a49ce91f20d6b4a58fdf50d1cf75d.jpg"
                 },
                 {
                     "id": 9,
@@ -2599,8 +2599,8 @@
                     "description": "Shared/Split Screen Co-op"
                 },
                 {
-                    "id": 24,
-                    "description": "Shared/Split Screen"
+                    "name": "Quiplash 3: Secret Schmitty",
+                    "path": "https://steamcdn-a.akamaihd.net/steamcommunity/public/images/apps/1211630/b92ba9f68c898f70e4abb7694ed28d4c852dc363.jpg"
                 },
                 {
                     "id": 27,
@@ -2611,20 +2611,20 @@
                     "description": "Steam Achievements"
                 },
                 {
-                    "id": 28,
-                    "description": "Full controller support"
+                    "name": "Devils and the Details: Pitchfork Perfect",
+                    "path": "https://steamcdn-a.akamaihd.net/steamcommunity/public/images/apps/1211630/7ab487f9a4df4531b4110070f760e0bfd2b1c353.jpg"
                 },
                 {
                     "id": 29,
                     "description": "Steam Trading Cards"
                 },
                 {
-                    "id": 41,
-                    "description": "Remote Play on Phone"
+                    "name": "Devils and the Details: Tattletale",
+                    "path": "https://steamcdn-a.akamaihd.net/steamcommunity/public/images/apps/1211630/7ab487f9a4df4531b4110070f760e0bfd2b1c353.jpg"
                 },
                 {
-                    "id": 42,
-                    "description": "Remote Play on Tablet"
+                    "name": "Devils and the Details: TGIF",
+                    "path": "https://steamcdn-a.akamaihd.net/steamcommunity/public/images/apps/1211630/7ab487f9a4df4531b4110070f760e0bfd2b1c353.jpg"
                 },
                 {
                     "id": 43,
@@ -2644,8 +2644,8 @@
                     "description": "Free to Play"
                 },
                 {
-                    "id": "23",
-                    "description": "Indie"
+                    "name": "Champ'd Up: The Comeback Kid",
+                    "path": "https://steamcdn-a.akamaihd.net/steamcommunity/public/images/apps/1211630/e9ebdd5745fdc8eb30c584edcc673ad0179cb36e.jpg"
                 }
             ],
             "screenshots": [{
