@@ -38,7 +38,9 @@ const url = "https://floating-plateau-01072.herokuapp.com";
 window.onload = initialize;
 async function initialize(){
     console.log("initialized");
-    await loadGames();
+    (async () => {await loadGames();})();
+
+   // await loadGames();
     renderGames();
 
 }
@@ -107,9 +109,15 @@ function renderGames(){
             });
             findLobbyButton.innerText = "Find Lobby";
 
-            gameInfoPopup.appendChild(websiteButton);
-            gameInfoPopup.appendChild(findLobbyButton);
-            gameInfoPopup.appendChild(createLobbyButton);
+            const popupContainer = document.createElement('div');
+            popupContainer.classList.add('row');
+            popupContainer.setAttribute('id',currentGame.name + ".popup_container");
+
+            popupContainer.appendChild(websiteButton);
+            popupContainer.appendChild(findLobbyButton);
+            popupContainer.appendChild(createLobbyButton);
+
+            gameInfoPopup.appendChild(popupContainer);
             gameTile.appendChild(gameInfo);
             gameTile.setAttribute('id', currentGame.name + ".gameTile");
             gameTile.appendChild(gameInfoPopup);
