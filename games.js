@@ -1,72 +1,52 @@
 'use strict';
 
-// const { ObjectId } = require("mongodb");
-
-// const url = "https://floating-plateau-01072.herokuapp.com";
-
-// const secrets = require('./secrets.json');
-
-
-// const steamKey = secrets.steamKey;
-// const steamAPIURL = "https://api.steampowered.com/ISteamApps/GetAppList/v2/key=" + steamKey;
-
-// const games = [];
-
-// async function makegameDB() {
-//     const response = await fetch('./steamapps.json');
-//     let gameList;
-//     if (response.ok) {
-//         gameList = await response.json();
-//         gameList = gameList.applist.apps;
-//     }
-//     else {
-//         console.error("Failed to read steamapps.json failed to load");
-//     }
-    
-//     for (const apps of gameList){
-//         const game = await fetch("https://store.steampowered.com/api/appdetails?appids=" + apps.appid);
-//         if(game.ok){
-//             let gameApp = await game.json();
-//             gameApp.categories.forEach( category => { if(category["description"] === "multiplayer") { games.add(gameApp); } } );
-//         }
-
-//     }
-// }
-
+// URL is website we're hosting at.
 const url = "https://floating-plateau-01072.herokuapp.com";
 
+// Game grid is the grid containing available games
+const gameGrid = document.getElementById('gameGrid');
+
+// Initialize the page
 initialize();
-async function initialize(){
+
+// Initalizes the games DB, and then renders it.
+async function initialize() {
+    await loadGames().then(() => { renderGames(); });
     console.log("initialized");
-    await loadGames().then(() => {renderGames();});
 }
 
-
-async function loadGames(){
-    const allGameInfoResponse = await fetch(url + '/readAllGames');
-    if (allGameInfoResponse.ok) { 
+// Loads games from the gamesDB which is in mongo
+async function loadGames() {
+    const allGameInfoResponse = await fetch(url + '/readAllGames', {
+        method: "GET",
+        headers: { 
+            "Content-type": "application/json; charset=UTF-8"
+        }});
+    if (allGameInfoResponse.ok) {
         const games = await allGameInfoResponse.json();
         window.games = games;
         console.log(games);
     }
-    else{
-        console.log('failed to read all games');
+    else {
+        console.log(allGameInfoResponse);
     }
 }
 
-const gameGrid = document.getElementById('gameGrid');
-
-function renderGames(){
-    let counter = 0;
-    for(let i = 0; i < window.games.length/3; ++i){
+// Renders the games as images in a grid.
+// if you click on one it will create a popup with information about the game and a few buttons which link elsewhere
+function renderGames() {
+    let counter = 0; // number of games added
+    for (let i = 0; i < window.games.length / 3; ++i) {
+        // Creates a row for the grid
         const row = document.createElement('div');
         row.classList.add('row');
-        row.setAttribute('id',"row " + (i+1));
-        for(let j = 0; j < 3; ++j){
-            if(counter >= window.games.length){
+        row.setAttribute('id', "row " + (i + 1));
+        for (let j = 0; j < 3; ++j) {
+            // if there's not a clean number of games, it will cut off to not break from indexing incorrectly
+            if (counter >= window.games.length) {
                 break;
             }
-            const currentGame = window.games[counter].data;
+            const currentGame = window.games[counter].data; // currentGame 
             const gameTile = document.createElement('div');
             gameTile.classList.add('col');
             const gameInfo = document.createElement('img');
@@ -86,7 +66,7 @@ function renderGames(){
                 location.assign('https://floating-plateau-01072.herokuapp.com/'); // currently just links to lobbies, will have a post request
             });
             createLobbyButton.innerText = "Create lobby";
-            
+
             const websiteButton = document.createElement('a');
             websiteButton.setAttribute('id', currentGame.name + ".website_button");
             websiteButton.setAttribute('type', 'button');
@@ -107,7 +87,7 @@ function renderGames(){
 
             const popupContainer = document.createElement('div');
             popupContainer.classList.add('row');
-            popupContainer.setAttribute('id',currentGame.name + ".popup_container");
+            popupContainer.setAttribute('id', currentGame.name + ".popup_container");
 
             popupContainer.appendChild(websiteButton);
             popupContainer.appendChild(findLobbyButton);
@@ -130,7 +110,7 @@ function renderGames(){
     }
 }
 
-function drawPopup(name){
+function drawPopup(name) {
     console.log("clicked");
     const popup = document.getElementById(name);
     popup.classList.toggle('show');
