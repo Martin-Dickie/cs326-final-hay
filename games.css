@@ -30,6 +30,10 @@
     letter-spacing: -0.05em;
 }
 
+.btn-group {
+    margin-left: 35%;
+}
+
 img {
     max-width: 400px;
     max-height: 400px;
@@ -55,7 +59,8 @@ img {
     display: grid;
     grid-template-columns: repeat(3, auto);
     grid-gap: 0px;
-    width: 900px
+    width: 900px;
+    margin-left: 30%;
 }
 
 .gradient {
