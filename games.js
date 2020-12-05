@@ -35,7 +35,7 @@
 
 const url = "https://floating-plateau-01072.herokuapp.com";
 
-(async () => { window.onload = await initialize;});
+initialize();
 async function initialize(){
     console.log("initialized");
     (async () => {await loadGames();})();
