@@ -33,6 +33,8 @@
 //     }
 // }
 
+const url = "https://floating-plateau-01072.herokuapp.com";
+
 window.onload = initialize;
 async function initialize(){
     console.log("initialized");
@@ -43,9 +45,9 @@ async function initialize(){
 
 
 async function loadGames(){
-    const loadGamesCall = await fetch("gamesDB.json");
-    if(loadGamesCall.ok){
-        const games = await loadGamesCall.json();
+    const allGameInfoResponse = await fetch(url + '/readAllGames');
+    if (allGameInfoResponse.ok) { 
+        const games = await allGameInfoResponse.json();
         window.games = games;
         console.log(games);
     }
