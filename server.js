@@ -50,7 +50,7 @@ app.get('/deleteUser', async (req, res) => {
 
 app.get('/favicon.ico',async (req,res) => {
     res.sendFile('./favicon.ico', {root: '.'});
-}
+});
 
 app.post('/createUser', async (req, res) => {
     await client.db("Haystation").collection("Users").insertOne(req.body);
