@@ -28,11 +28,15 @@ const uri = "mongodb+srv://user:"+password+"@cluster0.bxhm7.mongodb.net/HayStati
 const client = new MongoClient(uri, { useNewUrlParser: true });
 
 app.get('/', (req, res) => {
-    res.sendFile('./lobbies.html', { root: '.' });
+    res.sendFile('./games.html', { root: '.' });
 });
 
 app.get('/games',(req,res) => {
     res.sendFile('./games.html', {root: '.'});
+});
+
+app.get('/lobbies', (req, res) => {
+    res.sendFile('./lobbies.html', { root: '.' });
 });
 
 app.get('/readUser', async (req, res) => {

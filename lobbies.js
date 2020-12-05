@@ -23,10 +23,8 @@ async function go() {
 
 async function validateUser(name) {
     const response = await getUserInfo(name);
-    console.log(response);
     if (response.length === 0) {
         // New User
-        console.log("making new user");
         const status = window.prompt("A new user! What's your current status? (This will display in friends lists)");
         await fetch(url + "/createUser", {
             method: "POST",
@@ -239,7 +237,7 @@ async function getAndRenderLobbyInfo(element) {
             
             // Action Listener for Joining Lobby
             newRow.addEventListener('click', async function() {
-                if (confirm('Join '+ allLobbyInfo[newRow.id].name +'? '+newRow.id)) {
+                if (confirm('Join '+ allLobbyInfo[newRow.id].name +'? ')) {
                     allLobbyInfo[newRow.id].players += 1;
                     allLobbyInfo[newRow.id].users.push(user);
                     await fetch(url + "/updateLobby", {
