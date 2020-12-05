@@ -70,7 +70,7 @@ async function getUserInfo(name) {
 *   {
 *       name: string,
 *       game: string,
-*       status: string,
+*       message: string,
 *       players: number,
 *       maxplayers: number,
 *       users: [user, user....]
@@ -79,14 +79,14 @@ async function getUserInfo(name) {
 document.getElementById('createLobby').addEventListener('click', async function () {
     const name = prompt("Name of Lobby?");
     const game = prompt("What Game Will you Be Playing?");
-    const status = 'Waiting for more players...';
+    const message = prompt("Message? (like a lobby code?)");
     const players = 0;
     const maxplayers = prompt("Maximum Number of Players?");
 
     const newGame = {
         name: name,
         game: game,
-        status: status,
+        message: message,
         players: players,
         maxplayers: maxplayers,
         users: []
@@ -102,6 +102,7 @@ document.getElementById('createLobby').addEventListener('click', async function 
     window.alert("Lobby created! Click in the browser to join");
     await getAndRenderLobbyInfo(document.getElementById('lobby-browser-table'));
 });
+
 
 /*
 *   Action listener for leaving the current lobby
@@ -140,6 +141,7 @@ document.getElementById('leaveLobby').addEventListener('click', async function (
             });
 
             window.alert("You have left the lobby!");
+            document.getElementById("lobby-message").innerText="";
             await getAndRenderLobbyInfo(document.getElementById('lobby-browser-table'));
             await getAndRenderCurrentLobby(document.getElementById('current-lobby-table'));
         }
@@ -198,7 +200,7 @@ async function getAndRenderFriendInfo(element) {
 *   Lobby: {
         name,
         game,
-        status,
+        message,
         players,
         maxplayers,
         users,
@@ -227,15 +229,12 @@ async function getAndRenderLobbyInfo(element) {
             nameElement.innerText = allLobbyInfo[i].name;
             const gameElement = document.createElement('td');
             gameElement.innerText = allLobbyInfo[i].game;
-            const statusElement = document.createElement('td');
-            statusElement.innerText = allLobbyInfo[i].status;
             const sizeElement = document.createElement('td');
             sizeElement.innerText = allLobbyInfo[i].players+'/'+allLobbyInfo[i].maxplayers;
 
             newRow.appendChild(idElement);
             newRow.appendChild(nameElement);
             newRow.appendChild(gameElement);
-            newRow.appendChild(statusElement);
             newRow.appendChild(sizeElement);
             
             // Action Listener for Joining Lobby
@@ -275,6 +274,7 @@ async function getAndRenderCurrentLobby(element) {
     }
     const users = lobby.users;
     document.getElementById("lobby-title").innerText=lobby.name;
+    document.getElementById("lobby-message").innerText=lobby.message;
     for(let i = 0; i < users.length; i++) {
         // Add lobby to page
         const newRow = document.createElement('tr');
