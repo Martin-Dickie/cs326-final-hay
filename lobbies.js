@@ -1,56 +1,64 @@
 'use strict';
 
-const url = "https://floating-plateau-01072.herokuapp.com";
-// const url = "http://localhost:8000";
+const url = 'https://floating-plateau-01072.herokuapp.com';
+// const url = 'http://localhost:8000';
 
-let user = window.localStorage.getItem("username"); 
+let user = window.localStorage.getItem('username'); 
 if (!user) {
-    user = window.prompt("Sign in or Signup! Enter your username:");
+    user = window.prompt('Sign in or Signup! Enter your username:');
     window.localStorage.setItem('username', user);
 }
 
+// Refactored "everything-function", ensures that validateUser finishes before the other functions
 go();
 
 async function go() {
     await validateUser(user);
     const lobby = await getCurrentLobby(user);
     if (lobby !== -1) {
-        await getAndRenderCurrentLobby(document.getElementById('current-lobby-table'));
+        await getAndRenderCurrentLobby();
     }
-    await getAndRenderFriendInfo(document.getElementById('friend-table-body'));
-    await getAndRenderLobbyInfo(document.getElementById('lobby-browser-table'));
+    await getAndRenderFriendInfo();
+    await getAndRenderLobbyInfo();
 }
 
+/*
+*   Takes in a name string and looks in the database for this name. Returns [] (empty array) if not found, else returns the info for the user with this name
+*/
 async function validateUser(name) {
     const response = await getUserInfo(name);
     if (response.length === 0) {
         // New User
-        const status = window.prompt("A new user! What's your current status? (This will display in friends lists)");
-        await fetch(url + "/createUser", {
-            method: "POST",
+        const status = window.prompt('A new user! What\'s your current status? (This will display in friends lists)');
+        await fetch(url + '/createUser', {
+            method: 'POST',
             body: JSON.stringify({
                 name: name,
                 status: status,
                 friends: []
             }),
             headers: { 
-                "Content-type": "application/json; charset=UTF-8"
+                'Content-type': 'application/json; charset=UTF-8'
             } 
         });
     } else {
         // else Returning User, userInfo will be fetched during rendering
-        window.alert("Welcome Back " + user + "!");
+        window.alert('Welcome Back ' + user + '!');
     }
     
 }
 
+// Global variable
 let userInfo;
 
+/*
+*   Refactored function for getting the info on a user with name "name". Returns the JSON object representing the user
+*/
 async function getUserInfo(name) {
     const userInfoResponse = await fetch(url + '/readUser?name='+name, {
-        method: "GET",
+        method: 'GET',
         headers: { 
-            "Content-type": "application/json; charset=UTF-8"
+            'Content-type': 'application/json; charset=UTF-8'
         }
     });
     if (userInfoResponse.ok) { 
@@ -63,23 +71,15 @@ async function getUserInfo(name) {
 }
 
 /*
-*   Prompts the user to create a lobby 
-*   Lobby info:
-*   {
-*       name: string,
-*       game: string,
-*       message: string,
-*       players: number,
-*       maxplayers: number,
-*       users: [user, user....]
-*   };
+*   Action listener to prompt the user to create a lobby 
 */
 document.getElementById('createLobby').addEventListener('click', async function () {
-    const name = prompt("Name of Lobby?");
-    const game = prompt("What Game Will you Be Playing?");
-    const message = prompt("Message? (like a lobby code?)");
+    // Get the info from the user
+    const name = prompt('Name of Lobby?');
+    const game = prompt('What Game Will you Be Playing?');
+    const message = prompt('Message? (like a lobby code?)');
     const players = 0;
-    const maxplayers = prompt("Maximum Number of Players?");
+    const maxplayers = prompt('Maximum Number of Players?');
 
     const newGame = {
         name: name,
@@ -89,16 +89,18 @@ document.getElementById('createLobby').addEventListener('click', async function 
         maxplayers: maxplayers,
         users: []
     };
-    await fetch(url + "/createLobby", {
-        method: "POST",
+    // API call
+    await fetch(url + '/createLobby', {
+        method: 'POST',
         body: JSON.stringify(newGame), 
         headers: { 
-            "Content-type": "application/json; charset=UTF-8"
+            'Content-type': 'application/json; charset=UTF-8'
         } 
     });
 
-    window.alert("Lobby created! Click in the browser to join");
-    await getAndRenderLobbyInfo(document.getElementById('lobby-browser-table'));
+    // Done
+    window.alert('Lobby created! Click in the browser to join');
+    await getAndRenderLobbyInfo();
 });
 
 
@@ -106,58 +108,55 @@ document.getElementById('createLobby').addEventListener('click', async function 
 *   Action listener for leaving the current lobby
 */
 document.getElementById('leaveLobby').addEventListener('click', async function () {
-    if (confirm("Leave Lobby?")) {
+    // Confirm with the user
+    if (confirm('Leave Lobby?')) {
         const allLobbyInfoResponse = await fetch(url + '/readAllLobbies', {
-            method: "GET",
+            method: 'GET',
             headers: { 
-                "Content-type": "application/json; charset=UTF-8"
+                'Content-type': 'application/json; charset=UTF-8'
             }
         });
         if (allLobbyInfoResponse.ok) { 
-            const allLobbyInfo = await allLobbyInfoResponse.json();
-            let lobby = -1;
-            for (let i = 0; i < allLobbyInfo.length; i++) {
-                for (let j = 0; j < allLobbyInfo[i].users.length; j++) {
-                    if (allLobbyInfo[i].users[j] === user) {
-                        lobby = allLobbyInfo[i];
-                        lobby.players -= 1;
-                        lobby.users.pop(j);
-                        break;
-                    }
-                }
-            }
+
+            const lobby = await getCurrentLobby();
+            // User actually isn't in a lobby, let them know!
             if(lobby === -1) {
-                window.alert("You can't leave a lobby when you're not in one!");
+                window.alert('You can\'t leave a lobby when you\'re not in one!');
                 return;
             }
-            await fetch(url + "/updateLobby", {
-                method: "POST",
+            // API call to update the lobby with new player count and user info
+            await fetch(url + '/updateLobby', {
+                method: 'POST',
                 body: JSON.stringify(lobby), 
                 headers: { 
-                    "Content-type": "application/json; charset=UTF-8"
+                    'Content-type': 'application/json; charset=UTF-8'
                 } 
             });
 
-            window.alert("You have left the lobby!");
-            document.getElementById("lobby-message").innerText="";
-            await getAndRenderLobbyInfo(document.getElementById('lobby-browser-table'));
-            await getAndRenderCurrentLobby(document.getElementById('current-lobby-table'));
+            window.alert('You have left the lobby!');
+            document.getElementById('lobby-message').innerText='';
+            await getAndRenderLobbyInfo();
+            await getAndRenderCurrentLobby();
         }
     }
 });
 
-
-async function getAndRenderFriendInfo(element) {
-    while (element.firstChild) {
-        element.firstChild.remove();
+/*
+*   Fetches and renders the user's friend list into the right box
+*/
+async function getAndRenderFriendInfo() {
+    while (document.getElementById('friend-table-body').firstChild) {
+        document.getElementById('friend-table-body').firstChild.remove();
     }
+    // Update the userInfo global variable
     await getUserInfo(user);
     const friends = userInfo[0].friends;
+    // If user has no friends, tell how to make them!
     if (friends.length === 0) {
-        document.getElementById("friend-header").innerText = "Join a Lobby and Click a User to add a friend";
+        document.getElementById('friend-header').innerText = 'Join a Lobby and Click a User to add a friend';
     }
     for(let i = 0; i < friends.length; i++) {
-        // Add friends to page
+        // Add friends to page one by one
         const newRow = document.createElement('tr');
         newRow.setAttribute('id', `${i}`);
         const idElement = document.createElement('th');
@@ -177,41 +176,35 @@ async function getAndRenderFriendInfo(element) {
             if (confirm('Remove '+ friends[i].name +' as Friend? '+newRow.id)) {
                 const userInfo2 = await getUserInfo(user);
                 userInfo2[0].friends.splice(parseInt(newRow.id), 1);
-                await fetch(url + "/updateUser", {
-                    method: "POST",
+                await fetch(url + '/updateUser', {
+                    method: 'POST',
                     body: JSON.stringify(userInfo2[0]), 
                     headers: { 
-                        "Content-type": "application/json; charset=UTF-8"
+                        'Content-type': 'application/json; charset=UTF-8'
                     } 
                 });
                 // Re-render friends list:
-                await getAndRenderFriendInfo(element);
+                await getAndRenderFriendInfo();
             }
         });
-        element.appendChild(newRow);
+        document.getElementById('friend-table-body').appendChild(newRow);
         
     }
 }
 
 
 /*
-*   Lobby: {
-        name,
-        game,
-        message,
-        players,
-        maxplayers,
-        users,
-    }
+*   Fetches and renders the info from the current live lobbies into the middle box
 */
-async function getAndRenderLobbyInfo(element) {
-    while (element.firstChild) {
-        element.firstChild.remove();
+async function getAndRenderLobbyInfo() {
+    while (document.getElementById('lobby-browser-table').firstChild) {
+        document.getElementById('lobby-browser-table').firstChild.remove();
     }
+    // Initial GET request
     const allLobbyInfoResponse = await fetch(url + '/readAllLobbies', {
-        method: "GET",
+        method: 'GET',
         headers: { 
-            "Content-type": "application/json; charset=UTF-8"
+            'Content-type': 'application/json; charset=UTF-8'
         }
     });
     if (allLobbyInfoResponse.ok) { 
@@ -240,18 +233,20 @@ async function getAndRenderLobbyInfo(element) {
                 if (confirm('Join '+ allLobbyInfo[newRow.id].name +'? ')) {
                     allLobbyInfo[newRow.id].players += 1;
                     allLobbyInfo[newRow.id].users.push(user);
-                    await fetch(url + "/updateLobby", {
-                        method: "POST",
+                    await fetch(url + '/updateLobby', {
+                        method: 'POST',
                         body: JSON.stringify(allLobbyInfo[newRow.id]), 
                         headers: { 
-                            "Content-type": "application/json; charset=UTF-8"
+                            'Content-type': 'application/json; charset=UTF-8'
                         } 
                     });
-                    await getAndRenderLobbyInfo(document.getElementById('lobby-browser-table'));
-                    await getAndRenderCurrentLobby(document.getElementById('current-lobby-table'));
+                    // Re-render the lobby browser to reflect change
+                    await getAndRenderLobbyInfo();
+                    // Render the new lobby to the left
+                    await getAndRenderCurrentLobby();
                 }
             });
-            element.appendChild(newRow);
+            document.getElementById('lobby-browser-table').appendChild(newRow);
         }
     } else {
         alert('HTTP-Error: ' + allLobbyInfoResponse.status);
@@ -259,22 +254,25 @@ async function getAndRenderLobbyInfo(element) {
 }
 
 
-
+/*
+*   Fetches and renders info on the current lobby that the user is in
+*/
 async function getAndRenderCurrentLobby(element) {
     while (element.firstChild) {
         element.firstChild.remove();
     }
     const lobby = await getCurrentLobby();
     if (lobby === -1) {
-        // No lobby to leave
-        document.getElementById("lobby-title").innerText="Click Lobby to Join";
+        // No lobby to render!
+        document.getElementById('lobby-title').innerText='Click Lobby to Join';
         return;
     }
+    // else, go through the render process
     const users = lobby.users;
-    document.getElementById("lobby-title").innerText=lobby.name;
-    document.getElementById("lobby-message").innerText=lobby.message;
+    document.getElementById('lobby-title').innerText=lobby.name;
+    document.getElementById('lobby-message').innerText=lobby.message;
     for(let i = 0; i < users.length; i++) {
-        // Add lobby to page
+        // Add user info to page
         const newRow = document.createElement('tr');
         const idElement = document.createElement('th');
         newRow.setAttribute('id', `${i}`);
@@ -288,7 +286,9 @@ async function getAndRenderCurrentLobby(element) {
         
         // Action Listener for Adding Friend
         newRow.addEventListener('click', async function() {
+            // Confirm with user
             if (confirm('Add '+ users[newRow.id] +' as a friend? '+newRow.id)) {
+                // Bookkeeping the user and the friend they wish to add
                 const me = await getUserInfo(user);
                 const newFriend = await getUserInfo(users[newRow.id]);
                 me[0].friends.push({
@@ -296,31 +296,35 @@ async function getAndRenderCurrentLobby(element) {
                     status: newFriend[0].status,
                     _id: newFriend[0]._id
                 });
-                await fetch(url + "/updateUser", {
-                    method: "POST",
+                // do it!
+                await fetch(url + '/updateUser', {
+                    method: 'POST',
                     body: JSON.stringify(me[0]), 
                     headers: { 
-                        "Content-type": "application/json; charset=UTF-8"
+                        'Content-type': 'application/json; charset=UTF-8'
                     } 
                 });
-                await getAndRenderFriendInfo(document.getElementById('friend-table-body'));
-                await getAndRenderLobbyInfo(document.getElementById('lobby-browser-table'));
-                await getAndRenderCurrentLobby(document.getElementById('current-lobby-table'));
+                // Re-render friends list to reflect change
+                await getAndRenderFriendInfo();
             }
         });
         element.appendChild(newRow);
     }
 }
 
-
+/*
+*   Refactored function that returns the current lobby that the user is in. Returns -1 if no lobby, returns the lobby info if user is in a lobby
+*/
 async function getCurrentLobby() {
+    // Initial fetch
     const allLobbyInfoResponse = await fetch(url + '/readAllLobbies', {
-        method: "GET",
+        method: 'GET',
         headers: { 
-            "Content-type": "application/json; charset=UTF-8"
+            'Content-type': 'application/json; charset=UTF-8'
         }
     });
     if (allLobbyInfoResponse.ok) {
+        // search through the users of each lobby
         const allLobbyInfo = await allLobbyInfoResponse.json();
         for (let i = 0; i < allLobbyInfo.length; i++) {
             for (let j = 0; j < allLobbyInfo[i].users.length; j++) {
@@ -329,8 +333,10 @@ async function getCurrentLobby() {
                 }
             }
         }
+        // Not found
         return -1;
     } else {
-        return -1;
+        // Error
+        alert('HTTP-Error: ' + allLobbyInfoResponse.status);
     }
 }
