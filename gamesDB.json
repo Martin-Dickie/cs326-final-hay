@@ -1,4 +1,5 @@
-[{
+[
+    {
         "data": {
             "type": "game",
             "name": "Among Us",
@@ -43,25 +44,29 @@
             "packages": [
                 307391
             ],
-            "package_groups": [{
-                "name": "default",
-                "title": "Buy Among Us",
-                "description": "",
-                "selection_text": "Select a purchase option",
-                "save_text": "",
-                "display_type": 0,
-                "is_recurring_subscription": "false",
-                "subs": [{
-                    "packageid": 307391,
-                    "percent_savings_text": " ",
-                    "percent_savings": 0,
-                    "option_text": "Among Us - $4.99",
-                    "option_description": "",
-                    "can_get_free_license": "0",
-                    "is_free_license": false,
-                    "price_in_cents_with_discount": 499
-                }]
-            }],
+            "package_groups": [
+                {
+                    "name": "default",
+                    "title": "Buy Among Us",
+                    "description": "",
+                    "selection_text": "Select a purchase option",
+                    "save_text": "",
+                    "display_type": 0,
+                    "is_recurring_subscription": "false",
+                    "subs": [
+                        {
+                            "packageid": 307391,
+                            "percent_savings_text": " ",
+                            "percent_savings": 0,
+                            "option_text": "Among Us - $4.99",
+                            "option_description": "",
+                            "can_get_free_license": "0",
+                            "is_free_license": false,
+                            "price_in_cents_with_discount": 499
+                        }
+                    ]
+                }
+            ],
             "platforms": {
                 "windows": true,
                 "mac": false,
@@ -71,7 +76,8 @@
                 "score": 84,
                 "url": "https://www.metacritic.com/game/pc/among-us?ftag=MCD-06-10aaa1f"
             },
-            "categories": [{
+            "categories": [
+                {
                     "id": 1,
                     "description": "Multi-player"
                 },
@@ -112,11 +118,14 @@
                     "description": "Remote Play on Tablet"
                 }
             ],
-            "genres": [{
-                "id": "4",
-                "description": "Casual"
-            }],
-            "screenshots": [{
+            "genres": [
+                {
+                    "id": "4",
+                    "description": "Casual"
+                }
+            ],
+            "screenshots": [
+                {
                     "id": 0,
                     "path_thumbnail": "https://steamcdn-a.akamaihd.net/steam/apps/945360/ss_c80d2f3fab624b18d9531adc6957767a7fede100.600x338.jpg?t=1606422465",
                     "path_full": "https://steamcdn-a.akamaihd.net/steam/apps/945360/ss_c80d2f3fab624b18d9531adc6957767a7fede100.1920x1080.jpg?t=1606422465"
@@ -147,7 +156,8 @@
                     "path_full": "https://steamcdn-a.akamaihd.net/steam/apps/945360/ss_943c487e302fa5fc303d59e45a03218e25a2a59c.1920x1080.jpg?t=1606422465"
                 }
             ],
-            "movies": [{
+            "movies": [
+                {
                     "id": 256758605,
                     "name": "MIRA Trailer",
                     "thumbnail": "https://steamcdn-a.akamaihd.net/steam/apps/256758605/movie.293x165.jpg?t=1565291941",
@@ -193,7 +203,8 @@
                 "notes": null
             }
         }
-    }, {
+    },
+    {
         "data": {
             "type": "game",
             "name": "Unfortunate Spacemen",
@@ -231,31 +242,36 @@
             "packages": [
                 471860
             ],
-            "package_groups": [{
-                "name": "default",
-                "title": "Buy Unfortunate Spacemen",
-                "description": "",
-                "selection_text": "Select a purchase option",
-                "save_text": "",
-                "display_type": 0,
-                "is_recurring_subscription": "false",
-                "subs": [{
-                    "packageid": 471860,
-                    "percent_savings_text": " ",
-                    "percent_savings": 0,
-                    "option_text": "Unfortunate Spacemen - Deathproof Edition - $24.99",
-                    "option_description": "",
-                    "can_get_free_license": "0",
-                    "is_free_license": false,
-                    "price_in_cents_with_discount": 2499
-                }]
-            }],
+            "package_groups": [
+                {
+                    "name": "default",
+                    "title": "Buy Unfortunate Spacemen",
+                    "description": "",
+                    "selection_text": "Select a purchase option",
+                    "save_text": "",
+                    "display_type": 0,
+                    "is_recurring_subscription": "false",
+                    "subs": [
+                        {
+                            "packageid": 471860,
+                            "percent_savings_text": " ",
+                            "percent_savings": 0,
+                            "option_text": "Unfortunate Spacemen - Deathproof Edition - $24.99",
+                            "option_description": "",
+                            "can_get_free_license": "0",
+                            "is_free_license": false,
+                            "price_in_cents_with_discount": 2499
+                        }
+                    ]
+                }
+            ],
             "platforms": {
                 "windows": true,
                 "mac": false,
                 "linux": false
             },
-            "categories": [{
+            "categories": [
+                {
                     "id": 2,
                     "description": "Single-player"
                 },
@@ -304,7 +320,8 @@
                     "description": "Partial Controller Support"
                 }
             ],
-            "genres": [{
+            "genres": [
+                {
                     "id": "1",
                     "description": "Action"
                 },
@@ -321,7 +338,8 @@
                     "description": "Strategy"
                 }
             ],
-            "screenshots": [{
+            "screenshots": [
+                {
                     "id": 0,
                     "path_thumbnail": "https://steamcdn-a.akamaihd.net/steam/apps/408900/ss_a48118f623fff18f62a16981de285623d61d4fc6.600x338.jpg?t=1603194203",
                     "path_full": "https://steamcdn-a.akamaihd.net/steam/apps/408900/ss_a48118f623fff18f62a16981de285623d61d4fc6.1920x1080.jpg?t=1603194203"
@@ -367,7 +385,8 @@
                     "path_full": "https://steamcdn-a.akamaihd.net/steam/apps/408900/ss_21adc22121c6fe48887e1dcdff60e7f971c30162.1920x1080.jpg?t=1603194203"
                 }
             ],
-            "movies": [{
+            "movies": [
+                {
                     "id": 256789280,
                     "name": "Unfortunate Spacemen Launch Trailer",
                     "thumbnail": "https://steamcdn-a.akamaihd.net/steam/apps/256789280/movie.293x165.jpg?t=1592226585",
@@ -415,7 +434,8 @@
             },
             "achievements": {
                 "total": 75,
-                "highlighted": [{
+                "highlighted": [
+                    {
                         "name": "Out to Launch",
                         "path": "https://steamcdn-a.akamaihd.net/steamcommunity/public/images/apps/408900/12480a738de4c73a6e83bae556eb93d1225b3ff8.jpg"
                     },
@@ -471,7 +491,8 @@
                 "notes": null
             }
         }
-    }, {
+    },
+    {
         "data": {
             "type": "game",
             "name": "The Jackbox Party Pack 3",
@@ -517,31 +538,36 @@
             "packages": [
                 90559
             ],
-            "package_groups": [{
-                "name": "default",
-                "title": "Buy The Jackbox Party Pack 3",
-                "description": "",
-                "selection_text": "Select a purchase option",
-                "save_text": "",
-                "display_type": 0,
-                "is_recurring_subscription": "false",
-                "subs": [{
-                    "packageid": 90559,
-                    "percent_savings_text": " ",
-                    "percent_savings": 0,
-                    "option_text": "The Jackbox Party Pack 3 - $24.99",
-                    "option_description": "",
-                    "can_get_free_license": "0",
-                    "is_free_license": false,
-                    "price_in_cents_with_discount": 2499
-                }]
-            }],
+            "package_groups": [
+                {
+                    "name": "default",
+                    "title": "Buy The Jackbox Party Pack 3",
+                    "description": "",
+                    "selection_text": "Select a purchase option",
+                    "save_text": "",
+                    "display_type": 0,
+                    "is_recurring_subscription": "false",
+                    "subs": [
+                        {
+                            "packageid": 90559,
+                            "percent_savings_text": " ",
+                            "percent_savings": 0,
+                            "option_text": "The Jackbox Party Pack 3 - $24.99",
+                            "option_description": "",
+                            "can_get_free_license": "0",
+                            "is_free_license": false,
+                            "price_in_cents_with_discount": 2499
+                        }
+                    ]
+                }
+            ],
             "platforms": {
                 "windows": true,
                 "mac": true,
                 "linux": true
             },
-            "categories": [{
+            "categories": [
+                {
                     "id": 2,
                     "description": "Single-player"
                 },
@@ -598,7 +624,8 @@
                     "description": "Remote Play Together"
                 }
             ],
-            "genres": [{
+            "genres": [
+                {
                     "id": "4",
                     "description": "Casual"
                 },
@@ -611,7 +638,8 @@
                     "description": "Strategy"
                 }
             ],
-            "screenshots": [{
+            "screenshots": [
+                {
                     "id": 0,
                     "path_thumbnail": "https://steamcdn-a.akamaihd.net/steam/apps/434170/ss_759d8128e817d616a42d3e0105b66993a4f4b0ae.600x338.jpg?t=1597699274",
                     "path_full": "https://steamcdn-a.akamaihd.net/steam/apps/434170/ss_759d8128e817d616a42d3e0105b66993a4f4b0ae.1920x1080.jpg?t=1597699274"
@@ -672,26 +700,29 @@
                     "path_full": "https://steamcdn-a.akamaihd.net/steam/apps/434170/ss_a2cccf93e13306de13f83495fb91de175c591246.1920x1080.jpg?t=1597699274"
                 }
             ],
-            "movies": [{
-                "id": 256670660,
-                "name": "JPP3 Trailer",
-                "thumbnail": "https://steamcdn-a.akamaihd.net/steam/apps/256670660/movie.293x165.jpg?t=1473966269",
-                "webm": {
-                    "480": "http://steamcdn-a.akamaihd.net/steam/apps/256670660/movie480.webm?t=1473966269",
-                    "max": "http://steamcdn-a.akamaihd.net/steam/apps/256670660/movie_max.webm?t=1473966269"
-                },
-                "mp4": {
-                    "480": "http://steamcdn-a.akamaihd.net/steam/apps/256670660/movie480.mp4?t=1473966269",
-                    "max": "http://steamcdn-a.akamaihd.net/steam/apps/256670660/movie_max.mp4?t=1473966269"
-                },
-                "highlight": true
-            }],
+            "movies": [
+                {
+                    "id": 256670660,
+                    "name": "JPP3 Trailer",
+                    "thumbnail": "https://steamcdn-a.akamaihd.net/steam/apps/256670660/movie.293x165.jpg?t=1473966269",
+                    "webm": {
+                        "480": "http://steamcdn-a.akamaihd.net/steam/apps/256670660/movie480.webm?t=1473966269",
+                        "max": "http://steamcdn-a.akamaihd.net/steam/apps/256670660/movie_max.webm?t=1473966269"
+                    },
+                    "mp4": {
+                        "480": "http://steamcdn-a.akamaihd.net/steam/apps/256670660/movie480.mp4?t=1473966269",
+                        "max": "http://steamcdn-a.akamaihd.net/steam/apps/256670660/movie_max.mp4?t=1473966269"
+                    },
+                    "highlight": true
+                }
+            ],
             "recommendations": {
                 "total": 2428
             },
             "achievements": {
                 "total": 20,
-                "highlighted": [{
+                "highlighted": [
+                    {
                         "name": "Quiplash 2: Quip it Good",
                         "path": "https://steamcdn-a.akamaihd.net/steamcommunity/public/images/apps/434170/5c660654073d263e1d1976f6eaa77c35a96b8c1d.jpg"
                     },
@@ -747,7 +778,8 @@
                 "notes": null
             }
         }
-    }, {
+    },
+    {
         "data": {
             "type": "game",
             "name": "Town of Salem",
@@ -788,31 +820,36 @@
             "packages": [
                 55023
             ],
-            "package_groups": [{
-                "name": "default",
-                "title": "Buy Town of Salem",
-                "description": "",
-                "selection_text": "Select a purchase option",
-                "save_text": "",
-                "display_type": 0,
-                "is_recurring_subscription": "false",
-                "subs": [{
-                    "packageid": 55023,
-                    "percent_savings_text": " ",
-                    "percent_savings": 0,
-                    "option_text": "Town of Salem - $4.99",
-                    "option_description": "",
-                    "can_get_free_license": "0",
-                    "is_free_license": false,
-                    "price_in_cents_with_discount": 499
-                }]
-            }],
+            "package_groups": [
+                {
+                    "name": "default",
+                    "title": "Buy Town of Salem",
+                    "description": "",
+                    "selection_text": "Select a purchase option",
+                    "save_text": "",
+                    "display_type": 0,
+                    "is_recurring_subscription": "false",
+                    "subs": [
+                        {
+                            "packageid": 55023,
+                            "percent_savings_text": " ",
+                            "percent_savings": 0,
+                            "option_text": "Town of Salem - $4.99",
+                            "option_description": "",
+                            "can_get_free_license": "0",
+                            "is_free_license": false,
+                            "price_in_cents_with_discount": 499
+                        }
+                    ]
+                }
+            ],
             "platforms": {
                 "windows": true,
                 "mac": true,
                 "linux": false
             },
-            "categories": [{
+            "categories": [
+                {
                     "id": 1,
                     "description": "Multi-player"
                 },
@@ -833,7 +870,8 @@
                     "description": "Steam Cloud"
                 }
             ],
-            "genres": [{
+            "genres": [
+                {
                     "id": "23",
                     "description": "Indie"
                 },
@@ -846,7 +884,8 @@
                     "description": "Strategy"
                 }
             ],
-            "screenshots": [{
+            "screenshots": [
+                {
                     "id": 0,
                     "path_thumbnail": "https://steamcdn-a.akamaihd.net/steam/apps/334230/ss_778670cccc45b87960696135c5a6b90d27df418b.600x338.jpg?t=1581052242",
                     "path_full": "https://steamcdn-a.akamaihd.net/steam/apps/334230/ss_778670cccc45b87960696135c5a6b90d27df418b.1920x1080.jpg?t=1581052242"
@@ -872,26 +911,29 @@
                     "path_full": "https://steamcdn-a.akamaihd.net/steam/apps/334230/ss_d312893db2edc1ed482dd55dc1210a4620712dec.1920x1080.jpg?t=1581052242"
                 }
             ],
-            "movies": [{
-                "id": 2036034,
-                "name": "Trailer",
-                "thumbnail": "https://steamcdn-a.akamaihd.net/steam/apps/2036034/movie.293x165.jpg?t=1447365785",
-                "webm": {
-                    "480": "http://steamcdn-a.akamaihd.net/steam/apps/2036034/movie480.webm?t=1447365785",
-                    "max": "http://steamcdn-a.akamaihd.net/steam/apps/2036034/movie_max.webm?t=1447365785"
-                },
-                "mp4": {
-                    "480": "http://steamcdn-a.akamaihd.net/steam/apps/2036034/movie480.mp4?t=1447365785",
-                    "max": "http://steamcdn-a.akamaihd.net/steam/apps/2036034/movie_max.mp4?t=1447365785"
-                },
-                "highlight": true
-            }],
+            "movies": [
+                {
+                    "id": 2036034,
+                    "name": "Trailer",
+                    "thumbnail": "https://steamcdn-a.akamaihd.net/steam/apps/2036034/movie.293x165.jpg?t=1447365785",
+                    "webm": {
+                        "480": "http://steamcdn-a.akamaihd.net/steam/apps/2036034/movie480.webm?t=1447365785",
+                        "max": "http://steamcdn-a.akamaihd.net/steam/apps/2036034/movie_max.webm?t=1447365785"
+                    },
+                    "mp4": {
+                        "480": "http://steamcdn-a.akamaihd.net/steam/apps/2036034/movie480.mp4?t=1447365785",
+                        "max": "http://steamcdn-a.akamaihd.net/steam/apps/2036034/movie_max.mp4?t=1447365785"
+                    },
+                    "highlight": true
+                }
+            ],
             "recommendations": {
                 "total": 24813
             },
             "achievements": {
                 "total": 361,
-                "highlighted": [{
+                "highlighted": [
+                    {
                         "name": "Initiation",
                         "path": "https://steamcdn-a.akamaihd.net/steamcommunity/public/images/apps/334230/a67db87d8fa69009be491be535106b9cec464236.jpg"
                     },
@@ -992,31 +1034,36 @@
             "packages": [
                 418892
             ],
-            "package_groups": [{
-                "name": "default",
-                "title": "Buy The Jackbox Party Pack 7",
-                "description": "",
-                "selection_text": "Select a purchase option",
-                "save_text": "",
-                "display_type": 0,
-                "is_recurring_subscription": "false",
-                "subs": [{
-                    "packageid": 418892,
-                    "percent_savings_text": " ",
-                    "percent_savings": 0,
-                    "option_text": "The Jackbox Party Pack 7 - $29.99",
-                    "option_description": "",
-                    "can_get_free_license": "0",
-                    "is_free_license": false,
-                    "price_in_cents_with_discount": 2999
-                }]
-            }],
+            "package_groups": [
+                {
+                    "name": "default",
+                    "title": "Buy The Jackbox Party Pack 7",
+                    "description": "",
+                    "selection_text": "Select a purchase option",
+                    "save_text": "",
+                    "display_type": 0,
+                    "is_recurring_subscription": "false",
+                    "subs": [
+                        {
+                            "packageid": 418892,
+                            "percent_savings_text": " ",
+                            "percent_savings": 0,
+                            "option_text": "The Jackbox Party Pack 7 - $29.99",
+                            "option_description": "",
+                            "can_get_free_license": "0",
+                            "is_free_license": false,
+                            "price_in_cents_with_discount": 2999
+                        }
+                    ]
+                }
+            ],
             "platforms": {
                 "windows": true,
                 "mac": true,
                 "linux": true
             },
-            "categories": [{
+            "categories": [
+                {
                     "id": 2,
                     "description": "Single-player"
                 },
@@ -1069,7 +1116,8 @@
                     "description": "Remote Play Together"
                 }
             ],
-            "genres": [{
+            "genres": [
+                {
                     "id": "4",
                     "description": "Casual"
                 },
@@ -1078,7 +1126,8 @@
                     "description": "Indie"
                 }
             ],
-            "screenshots": [{
+            "screenshots": [
+                {
                     "id": 0,
                     "path_thumbnail": "https://steamcdn-a.akamaihd.net/steam/apps/1211630/ss_c89e2f32d8ff2a702c75fdc0a6f1fb214ede975e.600x338.jpg?t=1606862201",
                     "path_full": "https://steamcdn-a.akamaihd.net/steam/apps/1211630/ss_c89e2f32d8ff2a702c75fdc0a6f1fb214ede975e.1920x1080.jpg?t=1606862201"
@@ -1179,7 +1228,8 @@
                     "path_full": "https://steamcdn-a.akamaihd.net/steam/apps/1211630/ss_3344777b3df339fe86d9a983452e3806bc1675f3.1920x1080.jpg?t=1606862201"
                 }
             ],
-            "movies": [{
+            "movies": [
+                {
                     "id": 256811930,
                     "name": "Holiday Trailer",
                     "thumbnail": "https://steamcdn-a.akamaihd.net/steam/apps/256811930/movie.293x165.jpg?t=1606862197",
@@ -1269,7 +1319,8 @@
             },
             "achievements": {
                 "total": 20,
-                "highlighted": [{
+                "highlighted": [
+                    {
                         "name": "Quiplash 3: Domination",
                         "path": "https://steamcdn-a.akamaihd.net/steamcommunity/public/images/apps/1211630/ba281d1880a9c56b5f779f1f4a990554a285187d.jpg"
                     },
@@ -1325,7 +1376,8 @@
                 "notes": null
             }
         }
-    }, {
+    },
+    {
         "data": {
             "type": "game",
             "name": "Microsoft Flight Simulator",
@@ -1372,46 +1424,49 @@
                 472094,
                 475540
             ],
-            "package_groups": [{
-                "name": "default",
-                "title": "Buy Microsoft Flight Simulator",
-                "description": "",
-                "selection_text": "Select a purchase option",
-                "save_text": "",
-                "display_type": 0,
-                "is_recurring_subscription": "false",
-                "subs": [{
-                        "packageid": 433938,
-                        "percent_savings_text": " ",
-                        "percent_savings": 0,
-                        "option_text": "Microsoft Flight Simulator - $59.99",
-                        "option_description": "",
-                        "can_get_free_license": "0",
-                        "is_free_license": false,
-                        "price_in_cents_with_discount": 5999
-                    },
-                    {
-                        "packageid": 472094,
-                        "percent_savings_text": " ",
-                        "percent_savings": 0,
-                        "option_text": "Microsoft Flight Simulator Deluxe Bundle - $89.99",
-                        "option_description": "",
-                        "can_get_free_license": "0",
-                        "is_free_license": false,
-                        "price_in_cents_with_discount": 8999
-                    },
-                    {
-                        "packageid": 475540,
-                        "percent_savings_text": " ",
-                        "percent_savings": 0,
-                        "option_text": "Microsoft Flight Simulator Premium Deluxe Bundle - $119.99",
-                        "option_description": "",
-                        "can_get_free_license": "0",
-                        "is_free_license": false,
-                        "price_in_cents_with_discount": 11999
-                    }
-                ]
-            }],
+            "package_groups": [
+                {
+                    "name": "default",
+                    "title": "Buy Microsoft Flight Simulator",
+                    "description": "",
+                    "selection_text": "Select a purchase option",
+                    "save_text": "",
+                    "display_type": 0,
+                    "is_recurring_subscription": "false",
+                    "subs": [
+                        {
+                            "packageid": 433938,
+                            "percent_savings_text": " ",
+                            "percent_savings": 0,
+                            "option_text": "Microsoft Flight Simulator - $59.99",
+                            "option_description": "",
+                            "can_get_free_license": "0",
+                            "is_free_license": false,
+                            "price_in_cents_with_discount": 5999
+                        },
+                        {
+                            "packageid": 472094,
+                            "percent_savings_text": " ",
+                            "percent_savings": 0,
+                            "option_text": "Microsoft Flight Simulator Deluxe Bundle - $89.99",
+                            "option_description": "",
+                            "can_get_free_license": "0",
+                            "is_free_license": false,
+                            "price_in_cents_with_discount": 8999
+                        },
+                        {
+                            "packageid": 475540,
+                            "percent_savings_text": " ",
+                            "percent_savings": 0,
+                            "option_text": "Microsoft Flight Simulator Premium Deluxe Bundle - $119.99",
+                            "option_description": "",
+                            "can_get_free_license": "0",
+                            "is_free_license": false,
+                            "price_in_cents_with_discount": 11999
+                        }
+                    ]
+                }
+            ],
             "platforms": {
                 "windows": true,
                 "mac": false,
@@ -1421,7 +1476,8 @@
                 "score": 91,
                 "url": "https://www.metacritic.com/game/pc/microsoft-flight-simulator?ftag=MCD-06-10aaa1f"
             },
-            "categories": [{
+            "categories": [
+                {
                     "id": 2,
                     "description": "Single-player"
                 },
@@ -1442,11 +1498,14 @@
                     "description": "In-App Purchases"
                 }
             ],
-            "genres": [{
-                "id": "28",
-                "description": "Simulation"
-            }],
-            "screenshots": [{
+            "genres": [
+                {
+                    "id": "28",
+                    "description": "Simulation"
+                }
+            ],
+            "screenshots": [
+                {
                     "id": 0,
                     "path_thumbnail": "https://steamcdn-a.akamaihd.net/steam/apps/1250410/ss_8ec57421e95313272847b10d4b179e483bfefc4b.600x338.jpg?t=1601405668",
                     "path_full": "https://steamcdn-a.akamaihd.net/steam/apps/1250410/ss_8ec57421e95313272847b10d4b179e483bfefc4b.1920x1080.jpg?t=1601405668"
@@ -1547,7 +1606,8 @@
                     "path_full": "https://steamcdn-a.akamaihd.net/steam/apps/1250410/ss_a2a3aa69d655252087ace6eac887382f1e0582fa.1920x1080.jpg?t=1601405668"
                 }
             ],
-            "movies": [{
+            "movies": [
+                {
                     "id": 256802889,
                     "name": "Flight Simulator Accolades Trailer",
                     "thumbnail": "https://steamcdn-a.akamaihd.net/steam/apps/256802889/movie.293x165.jpg?t=1601405663",
@@ -1581,7 +1641,8 @@
             },
             "achievements": {
                 "total": 43,
-                "highlighted": [{
+                "highlighted": [
+                    {
                         "name": "Challenge Accepted",
                         "path": "https://steamcdn-a.akamaihd.net/steamcommunity/public/images/apps/1250410/cda92fc551b8726b05bb80762e6ce9e52fbbe5c4.jpg"
                     },
@@ -1686,25 +1747,29 @@
             "packages": [
                 262090
             ],
-            "package_groups": [{
-                "name": "default",
-                "title": "Buy Phoenix Point: Year One Edition",
-                "description": "",
-                "selection_text": "Select a purchase option",
-                "save_text": "",
-                "display_type": 0,
-                "is_recurring_subscription": "false",
-                "subs": [{
-                    "packageid": 262090,
-                    "percent_savings_text": "-50% ",
-                    "percent_savings": 0,
-                    "option_text": "Phoenix Point - <span class=\"discount_original_price\">$59.99</span> $29.99",
-                    "option_description": "",
-                    "can_get_free_license": "0",
-                    "is_free_license": false,
-                    "price_in_cents_with_discount": 2999
-                }]
-            }],
+            "package_groups": [
+                {
+                    "name": "default",
+                    "title": "Buy Phoenix Point: Year One Edition",
+                    "description": "",
+                    "selection_text": "Select a purchase option",
+                    "save_text": "",
+                    "display_type": 0,
+                    "is_recurring_subscription": "false",
+                    "subs": [
+                        {
+                            "packageid": 262090,
+                            "percent_savings_text": "-50% ",
+                            "percent_savings": 0,
+                            "option_text": "Phoenix Point - <span class=\"discount_original_price\">$59.99</span> $29.99",
+                            "option_description": "",
+                            "can_get_free_license": "0",
+                            "is_free_license": false,
+                            "price_in_cents_with_discount": 2999
+                        }
+                    ]
+                }
+            ],
             "platforms": {
                 "windows": true,
                 "mac": true,
@@ -1714,7 +1779,8 @@
                 "score": 74,
                 "url": "https://www.metacritic.com/game/pc/phoenix-point?ftag=MCD-06-10aaa1f"
             },
-            "categories": [{
+            "categories": [
+                {
                     "id": 2,
                     "description": "Single-player"
                 },
@@ -1731,7 +1797,8 @@
                     "description": "Steam Cloud"
                 }
             ],
-            "genres": [{
+            "genres": [
+                {
                     "id": "3",
                     "description": "RPG"
                 },
@@ -1740,7 +1807,8 @@
                     "description": "Strategy"
                 }
             ],
-            "screenshots": [{
+            "screenshots": [
+                {
                     "id": 0,
                     "path_thumbnail": "https://steamcdn-a.akamaihd.net/steam/apps/839770/ss_da83e15b8c09bf72c40557073a6e2095fd6177b6.600x338.jpg?t=1607018410",
                     "path_full": "https://steamcdn-a.akamaihd.net/steam/apps/839770/ss_da83e15b8c09bf72c40557073a6e2095fd6177b6.1920x1080.jpg?t=1607018410"
@@ -1816,7 +1884,8 @@
                     "path_full": "https://steamcdn-a.akamaihd.net/steam/apps/839770/ss_dfbed805e445cee29fab077eb6eb3b97f2030958.1920x1080.jpg?t=1607018410"
                 }
             ],
-            "movies": [{
+            "movies": [
+                {
                     "id": 256811964,
                     "name": "Phoenix Point: Year One Edition - Gameplay Trailer",
                     "thumbnail": "https://steamcdn-a.akamaihd.net/steam/apps/256811964/movie.293x165.jpg?t=1606883111",
@@ -1864,7 +1933,8 @@
             },
             "achievements": {
                 "total": 47,
-                "highlighted": [{
+                "highlighted": [
+                    {
                         "name": "Novice Builder",
                         "path": "https://steamcdn-a.akamaihd.net/steamcommunity/public/images/apps/839770/f482e2473aa302472f07dd27038e74427ce51d34.jpg"
                     },
@@ -1967,31 +2037,36 @@
             "packages": [
                 365345
             ],
-            "package_groups": [{
-                "name": "default",
-                "title": "Buy Baldur's Gate 3",
-                "description": "",
-                "selection_text": "Select a purchase option",
-                "save_text": "",
-                "display_type": 0,
-                "is_recurring_subscription": "false",
-                "subs": [{
-                    "packageid": 365345,
-                    "percent_savings_text": " ",
-                    "percent_savings": 0,
-                    "option_text": "Baldur's Gate 3 - $59.99",
-                    "option_description": "",
-                    "can_get_free_license": "0",
-                    "is_free_license": false,
-                    "price_in_cents_with_discount": 5999
-                }]
-            }],
+            "package_groups": [
+                {
+                    "name": "default",
+                    "title": "Buy Baldur's Gate 3",
+                    "description": "",
+                    "selection_text": "Select a purchase option",
+                    "save_text": "",
+                    "display_type": 0,
+                    "is_recurring_subscription": "false",
+                    "subs": [
+                        {
+                            "packageid": 365345,
+                            "percent_savings_text": " ",
+                            "percent_savings": 0,
+                            "option_text": "Baldur's Gate 3 - $59.99",
+                            "option_description": "",
+                            "can_get_free_license": "0",
+                            "is_free_license": false,
+                            "price_in_cents_with_discount": 5999
+                        }
+                    ]
+                }
+            ],
             "platforms": {
                 "windows": true,
                 "mac": true,
                 "linux": false
             },
-            "categories": [{
+            "categories": [
+                {
                     "id": 2,
                     "description": "Single-player"
                 },
@@ -2016,7 +2091,8 @@
                     "description": "Steam Cloud"
                 }
             ],
-            "genres": [{
+            "genres": [
+                {
                     "id": "25",
                     "description": "Adventure"
                 },
@@ -2033,7 +2109,8 @@
                     "description": "Early Access"
                 }
             ],
-            "screenshots": [{
+            "screenshots": [
+                {
                     "id": 0,
                     "path_thumbnail": "https://steamcdn-a.akamaihd.net/steam/apps/1086940/ss_fe11df98bed012128b166092bd5a01b6692b627f.600x338.jpg?t=1603803337",
                     "path_full": "https://steamcdn-a.akamaihd.net/steam/apps/1086940/ss_fe11df98bed012128b166092bd5a01b6692b627f.1920x1080.jpg?t=1603803337"
@@ -2154,7 +2231,8 @@
                     "path_full": "https://steamcdn-a.akamaihd.net/steam/apps/1086940/ss_2ed75eb900bb01434e1697e6630a632bf29ed3de.1920x1080.jpg?t=1603803337"
                 }
             ],
-            "movies": [{
+            "movies": [
+                {
                     "id": 256803753,
                     "name": "Early Access Trailer",
                     "thumbnail": "https://steamcdn-a.akamaihd.net/steam/apps/256803753/movie.293x165.jpg?t=1602003640",
@@ -2310,25 +2388,29 @@
             "packages": [
                 244484
             ],
-            "package_groups": [{
-                "name": "default",
-                "title": "Buy Per Aspera",
-                "description": "",
-                "selection_text": "Select a purchase option",
-                "save_text": "",
-                "display_type": 0,
-                "is_recurring_subscription": "false",
-                "subs": [{
-                    "packageid": 244484,
-                    "percent_savings_text": "-10% ",
-                    "percent_savings": 0,
-                    "option_text": "Per Aspera - <span class=\"discount_original_price\">$29.99</span> $26.99",
-                    "option_description": "",
-                    "can_get_free_license": "0",
-                    "is_free_license": false,
-                    "price_in_cents_with_discount": 2699
-                }]
-            }],
+            "package_groups": [
+                {
+                    "name": "default",
+                    "title": "Buy Per Aspera",
+                    "description": "",
+                    "selection_text": "Select a purchase option",
+                    "save_text": "",
+                    "display_type": 0,
+                    "is_recurring_subscription": "false",
+                    "subs": [
+                        {
+                            "packageid": 244484,
+                            "percent_savings_text": "-10% ",
+                            "percent_savings": 0,
+                            "option_text": "Per Aspera - <span class=\"discount_original_price\">$29.99</span> $26.99",
+                            "option_description": "",
+                            "can_get_free_license": "0",
+                            "is_free_license": false,
+                            "price_in_cents_with_discount": 2699
+                        }
+                    ]
+                }
+            ],
             "platforms": {
                 "windows": true,
                 "mac": false,
@@ -2338,7 +2420,8 @@
                 "score": 77,
                 "url": "https://www.metacritic.com/game/pc/per-aspera?ftag=MCD-06-10aaa1f"
             },
-            "categories": [{
+            "categories": [
+                {
                     "id": 2,
                     "description": "Single-player"
                 },
@@ -2351,7 +2434,8 @@
                     "description": "Steam Cloud"
                 }
             ],
-            "genres": [{
+            "genres": [
+                {
                     "id": "23",
                     "description": "Indie"
                 },
@@ -2364,7 +2448,8 @@
                     "description": "Strategy"
                 }
             ],
-            "screenshots": [{
+            "screenshots": [
+                {
                     "id": 0,
                     "path_thumbnail": "https://steamcdn-a.akamaihd.net/steam/apps/803050/ss_23cecb2d65d8fbb3d8f2a111547569a5d72ec901.600x338.jpg?t=1607113545",
                     "path_full": "https://steamcdn-a.akamaihd.net/steam/apps/803050/ss_23cecb2d65d8fbb3d8f2a111547569a5d72ec901.1920x1080.jpg?t=1607113545"
@@ -2410,7 +2495,8 @@
                     "path_full": "https://steamcdn-a.akamaihd.net/steam/apps/803050/ss_5b18d297fe8956ed4a2f570aa9389ef4ffb0fe28.1920x1080.jpg?t=1607113545"
                 }
             ],
-            "movies": [{
+            "movies": [
+                {
                     "id": 256812190,
                     "name": "Per Aspera - Launch Trailer",
                     "thumbnail": "https://steamcdn-a.akamaihd.net/steam/apps/256812190/movie.293x165.jpg?t=1607008101",
@@ -2444,7 +2530,8 @@
             },
             "achievements": {
                 "total": 32,
-                "highlighted": [{
+                "highlighted": [
+                    {
                         "name": "Just the Beginning",
                         "path": "https://steamcdn-a.akamaihd.net/steamcommunity/public/images/apps/803050/521b29c0c4f0d05c2ca40ff4c2d8d2e4ef436011.jpg"
                     },
@@ -2542,31 +2629,36 @@
             "packages": [
                 77032
             ],
-            "package_groups": [{
-                "name": "default",
-                "title": "Buy Brawlhalla",
-                "description": "",
-                "selection_text": "Select a purchase option",
-                "save_text": "",
-                "display_type": 0,
-                "is_recurring_subscription": "false",
-                "subs": [{
-                    "packageid": 77032,
-                    "percent_savings_text": " ",
-                    "percent_savings": 0,
-                    "option_text": "Brawlhalla - All Legends Pack - $19.99",
-                    "option_description": "",
-                    "can_get_free_license": "0",
-                    "is_free_license": false,
-                    "price_in_cents_with_discount": 1999
-                }]
-            }],
+            "package_groups": [
+                {
+                    "name": "default",
+                    "title": "Buy Brawlhalla",
+                    "description": "",
+                    "selection_text": "Select a purchase option",
+                    "save_text": "",
+                    "display_type": 0,
+                    "is_recurring_subscription": "false",
+                    "subs": [
+                        {
+                            "packageid": 77032,
+                            "percent_savings_text": " ",
+                            "percent_savings": 0,
+                            "option_text": "Brawlhalla - All Legends Pack - $19.99",
+                            "option_description": "",
+                            "can_get_free_license": "0",
+                            "is_free_license": false,
+                            "price_in_cents_with_discount": 1999
+                        }
+                    ]
+                }
+            ],
             "platforms": {
                 "windows": true,
                 "mac": true,
                 "linux": false
             },
-            "categories": [{
+            "categories": [
+                {
                     "id": 2,
                     "description": "Single-player"
                 },
@@ -2635,7 +2727,8 @@
                     "description": "Remote Play Together"
                 }
             ],
-            "genres": [{
+            "genres": [
+                {
                     "id": "1",
                     "description": "Action"
                 },
@@ -2648,7 +2741,8 @@
                     "path": "https://steamcdn-a.akamaihd.net/steamcommunity/public/images/apps/1211630/e9ebdd5745fdc8eb30c584edcc673ad0179cb36e.jpg"
                 }
             ],
-            "screenshots": [{
+            "screenshots": [
+                {
                     "id": 0,
                     "path_thumbnail": "https://steamcdn-a.akamaihd.net/steam/apps/291550/ss_82fb3eb44daef1e1bfebb9522beed6f5f6703b19.600x338.jpg?t=1604429982",
                     "path_full": "https://steamcdn-a.akamaihd.net/steam/apps/291550/ss_82fb3eb44daef1e1bfebb9522beed6f5f6703b19.1920x1080.jpg?t=1604429982"
@@ -2764,7 +2858,8 @@
                     "path_full": "https://steamcdn-a.akamaihd.net/steam/apps/291550/ss_b534211b03309a272a8a06fb7fccc398b7aa06ee.1920x1080.jpg?t=1604429982"
                 }
             ],
-            "movies": [{
+            "movies": [
+                {
                     "id": 256804820,
                     "name": "AMC’s The Walking Dead Battles In Brawlhalla!",
                     "thumbnail": "https://steamcdn-a.akamaihd.net/steam/apps/256804820/movie.293x165.jpg?t=1602692660",
@@ -2938,7 +3033,8 @@
             },
             "achievements": {
                 "total": 49,
-                "highlighted": [{
+                "highlighted": [
+                    {
                         "name": "Cash Money",
                         "path": "https://steamcdn-a.akamaihd.net/steamcommunity/public/images/apps/291550/373dc9f73958a286390010e9b939d1b7954e5e29.jpg"
                     },
