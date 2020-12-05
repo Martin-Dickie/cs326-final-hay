@@ -18,6 +18,7 @@
     display: inline-block;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    margin-left: 25%;
 }
 
 .wordart.blues .text {
