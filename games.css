@@ -9,8 +9,24 @@
     margin-bottom: 3em;
 }
 
-.title {
-    text-align: center;
+.wordart {
+    font-family: Arial, sans-serif;
+    font-size: 10em;
+    font-weight: bold;
+    position: relative;
+    z-index: 1;
+    display: inline-block;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+.wordart.blues .text {
+    font-family: Impact, sans-serif;
+    color: #24c0fd;
+    -webkit-text-stroke: 0.01em #0000aa;
+    filter: progid: DXImageTransform.Microsoft.Glow(Color=#0000aa, Strength=1);
+    text-shadow: 0.13em -0.13em 0px #0000aa;
+    letter-spacing: -0.05em;
 }
 
 img {
@@ -62,8 +78,6 @@ img {
     margin-left: 10px;
 }
 
-
-
 .popup {
     position: relative;
     display: inline-block;
@@ -93,7 +107,7 @@ img {
 }
 
 .popupButton {
-  padding-left: 10px;
+    padding-left: 10px;
 }
 
 
