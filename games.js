@@ -86,7 +86,7 @@ function renderGames() {
                         "Content-type": "application/json; charset=UTF-8"
                     }
                 });
-                location.assign('https://floating-plateau-01072.herokuapp.com/');
+                location.assign('https://floating-plateau-01072.herokuapp.com/lobbies');
                 window.alert("Lobby created! Click in the browser to join");
             });
             createLobbyButton.innerText = "Create lobby";
@@ -105,7 +105,7 @@ function renderGames() {
             findLobbyButton.setAttribute('type', 'button');
             findLobbyButton.classList.add("btn", "btn-secondary", "popupButton");
             findLobbyButton.addEventListener('click', () => {
-                location.assign('https://floating-plateau-01072.herokuapp.com/');
+                location.assign('https://floating-plateau-01072.herokuapp.com/lobbies');
             });
             findLobbyButton.innerText = "Find Lobby";
 
