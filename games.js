@@ -136,6 +136,8 @@ function renderGames() {
 
 function drawPopup(name) {
     console.log("clicked");
+    const allPopups = document.getElementsByClassName('popup');
+    allPopups.classList.remove('show');
     const popup = document.getElementById(name);
     popup.classList.toggle('show');
 }
