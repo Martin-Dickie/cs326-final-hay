@@ -3,10 +3,47 @@
 const url = "https://floating-plateau-01072.herokuapp.com";
 // const url = "http://localhost:8000";
 
-let user = window.localStorage.getItem("username"); // 
+let user = window.localStorage.getItem("username"); 
 if (!user) {
-    user = window.prompt("Sign in with your username!");
+    user = window.prompt("Sign in or Signup! Enter your username:");
     window.localStorage.setItem('username', user);
+}
+
+go();
+
+async function go() {
+    await validateUser(user);
+    const lobby = await getCurrentLobby(user);
+    if (lobby !== -1) {
+        await getAndRenderCurrentLobby(document.getElementById('current-lobby-table'));
+    }
+    await getAndRenderFriendInfo(document.getElementById('friend-table-body'));
+    await getAndRenderLobbyInfo(document.getElementById('lobby-browser-table'));
+}
+
+async function validateUser(name) {
+    const response = await getUserInfo(name);
+    console.log(response);
+    if (response.length === 0) {
+        // New User
+        console.log("making new user");
+        const status = window.prompt("A new user! What's your current status? (This will display in friends lists)");
+        await fetch(url + "/createUser", {
+            method: "POST",
+            body: JSON.stringify({
+                name: name,
+                status: status,
+                friends: []
+            }),
+            headers: { 
+                "Content-type": "application/json; charset=UTF-8"
+            } 
+        });
+    } else {
+        // else Returning User, userInfo will be fetched during rendering
+        window.alert("Welcome Back " + user + "!");
+    }
+    
 }
 
 let userInfo;
@@ -26,13 +63,6 @@ async function getUserInfo(name) {
         return -1;
     }
 }
-
-if (getCurrentLobby(user) !== -1) {
-    getAndRenderCurrentLobby(document.getElementById('current-lobby-table'));
-}
-getAndRenderFriendInfo(document.getElementById('friend-table-body'));
-getAndRenderLobbyInfo(document.getElementById('lobby-browser-table'));
-
 
 /*
 *   Prompts the user to create a lobby 
@@ -262,9 +292,7 @@ async function getAndRenderCurrentLobby(element) {
         newRow.addEventListener('click', async function() {
             if (confirm('Add '+ users[newRow.id] +' as a friend? '+newRow.id)) {
                 const me = await getUserInfo(user);
-                console.log(users[newRow.id]);
                 const newFriend = await getUserInfo(users[newRow.id]);
-                console.log(me[0]);
                 me[0].friends.push({
                     name: newFriend[0].name,
                     status: newFriend[0].status,
@@ -277,7 +305,7 @@ async function getAndRenderCurrentLobby(element) {
                         "Content-type": "application/json; charset=UTF-8"
                     } 
                 });
-                await getAndRenderCurrentLobby(element);
+                await getAndRenderFriendInfo(document.getElementById('friend-table-body'));
                 await getAndRenderLobbyInfo(document.getElementById('lobby-browser-table'));
                 await getAndRenderCurrentLobby(document.getElementById('current-lobby-table'));
             }
