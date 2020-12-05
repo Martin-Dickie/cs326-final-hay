@@ -138,6 +138,8 @@ function drawPopup(name) {
     console.log("clicked");
     const allPopups = document.getElementsByClassName('show');
     const popup = document.getElementById(name);
+    const storedClasses = popup.classList;
     for(const pop of allPopups){ if(pop.id !== popup.id){pop.classList.remove('show');}}
+    popup.classList = storedClasses;
     popup.classList.toggle('show');
 }
