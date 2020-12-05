@@ -75,6 +75,14 @@ function renderGames(){
             gameInfoPopup.setAttribute('id', currentGame.name + ".popup");
             gameInfoPopup.innerHTML = currentGame.name;
 
+            const createLobbyButton = document.createElement('a');
+            createLobbyButton.setAttribute('id', currentGame.name + ".lobby_button");
+            createLobbyButton.setAttribute('type', 'button');
+            createLobbyButton.classList.add("btn", "btn-secondary");
+            createLobbyButton.addEventListener('click', () => {
+                location.assign('https://floating-plateau-01072.herokuapp.com/'); // currently just links to lobbies, will have a post request
+            });
+            createLobbyButton.innerText = "Create lobby";
             
             const websiteButton = document.createElement('a');
             websiteButton.setAttribute('id', currentGame.name + ".website_button");
@@ -85,17 +93,18 @@ function renderGames(){
             });
             websiteButton.innerText = "Website";
 
-            const lobbyButton = document.createElement('a');
-            lobbyButton.setAttribute('id', currentGame.name + ".lobby_button");
-            lobbyButton.setAttribute('type', 'button');
-            lobbyButton.classList.add("btn", "btn-secondary");
-            lobbyButton.addEventListener('click', () => {
+            const findLobbyButton = document.createElement('a');
+            findLobbyButton.setAttribute('id', currentGame.name + ".lobby_button");
+            findLobbyButton.setAttribute('type', 'button');
+            findLobbyButton.classList.add("btn", "btn-secondary");
+            findLobbyButton.addEventListener('click', () => {
                 location.assign('https://floating-plateau-01072.herokuapp.com/');
             });
-            lobbyButton.innerText = "Find Lobby";
+            findLobbyButton.innerText = "Find Lobby";
 
             gameInfoPopup.appendChild(websiteButton);
-            gameInfoPopup.appendChild(lobbyButton);
+            gameInfoPopup.appendChild(findLobbyButton);
+            gameInfoPopup.appendChild(createLobbyButton);
             gameTile.appendChild(gameInfo);
             gameTile.setAttribute('id', currentGame.name + ".gameTile");
             gameTile.appendChild(gameInfoPopup);
