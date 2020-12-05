@@ -50,12 +50,12 @@ img {
     height: 100%;
     margin-bottom: 5px;
 }
-.btn{
-  border-color: white;
-  background-color: red;
-  color: white;
-}
 
+.btn {
+    border-color: blue;
+    background-color: rgb(231, 58, 58);
+    color: blue;
+}
 
 .col {
     padding: 2px;
