@@ -1,7 +1,7 @@
 'use strict';
 
-// const url = "https://floating-plateau-01072.herokuapp.com";
-const url = "http://localhost:8000";
+const url = "https://floating-plateau-01072.herokuapp.com";
+// const url = "http://localhost:8000";
 
 let user = window.localStorage.getItem("username"); // 
 if (!user) {
