@@ -1,7 +1,5 @@
 'use strict';
 
-const { ObjectId } = require("mongodb");
-
 const url = "https://floating-plateau-01072.herokuapp.com";
 // const url = "http://localhost:8000";
 
@@ -48,7 +46,6 @@ document.getElementById('createLobby').addEventListener('click', async function 
     const maxplayers = prompt("Maximum Number of Players?");
 
     const newGame = {
-        _id: ObjectId(),
         name: name,
         game: game,
         status: status,
@@ -67,15 +64,16 @@ document.getElementById('createLobby').addEventListener('click', async function 
     window.alert("Lobby created! Click in the browser to join");
     await getAndRenderLobbyInfo(document.getElementById('lobby-browser'));
 });
+
 /*
-*   Leaves current Lobby
+*   Action listener for leaving the current lobby
 */
 document.getElementById('leaveLobby').addEventListener('click', async function () {
     if (confirm("Leave Lobby?")) {
         const allLobbyInfoResponse = await fetch(url + '/readAllLobbies');
         if (allLobbyInfoResponse.ok) { 
             const allLobbyInfo = await allLobbyInfoResponse.json();
-            let lobby;
+            let lobby = -1;
             for (let i = 0; i < allLobbyInfo.length; i++) {
                 for (let j; j < allLobbyInfo[i].users.length; j++) {
                     if (allLobbyInfo[i].users[j].name === user) {
@@ -85,6 +83,9 @@ document.getElementById('leaveLobby').addEventListener('click', async function (
                         break;
                     }
                 }
+            }
+            if(lobby === -1) {
+                window.alert("You can't leave a lobby when you're not in one!");
             }
             await fetch(url + "/updateLobby", {
                 method: "POST",
