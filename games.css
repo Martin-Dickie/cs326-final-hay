@@ -9,8 +9,11 @@
     margin-bottom: 3em;
 }
 
+.title {
+    text-align: center;
+}
 
-img{
+img {
     max-width: 400px;
     max-height: 400px;
     width: 100%;
@@ -18,15 +21,16 @@ img{
     object-fit: stretch;
 }
 
-.row{
+.row {
     column-gap: auto;
-    max-width:800px;
-    max-height:400px;
+    max-width: 800px;
+    max-height: 400px;
     width: 100%;
     height: 100%;
-    margin-bottom:5px;
+    margin-bottom: 5px;
 }
-.col{
+
+.col {
     padding: 2px;
 }
 
@@ -66,10 +70,12 @@ img{
     -moz-user-select: none;
     -ms-user-select: none;
     user-select: none;
-  }
-  
-  /* The actual popup */
-  .popup .popuptext {
+}
+
+
+/* The actual popup */
+
+.popup .popuptext {
     visibility: hidden;
     width: 160px;
     background-color: #555;
@@ -82,10 +88,12 @@ img{
     bottom: 125%;
     left: 50%;
     margin-left: -80px;
-  }
-  
-  /* Popup arrow */
-  .popup .popuptext::after {
+}
+
+
+/* Popup arrow */
+
+.popup .popuptext::after {
     content: "";
     position: absolute;
     top: 100%;
@@ -94,22 +102,34 @@ img{
     border-width: 5px;
     border-style: solid;
     border-color: #555 transparent transparent transparent;
-  }
-  
-  /* Toggle this class - hide and show the popup */
-  .popup .show {
+}
+
+
+/* Toggle this class - hide and show the popup */
+
+.popup .show {
     visibility: visible;
     -webkit-animation: fadeIn 1s;
     animation: fadeIn 1s;
-  }
-  
-  /* Add animation (fade in the popup) */
-  @-webkit-keyframes fadeIn {
-    from {opacity: 0;} 
-    to {opacity: 1;}
-  }
-  
-  @keyframes fadeIn {
-    from {opacity: 0;}
-    to {opacity:1 ;}
-  }
+}
+
+
+/* Add animation (fade in the popup) */
+
+@-webkit-keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
