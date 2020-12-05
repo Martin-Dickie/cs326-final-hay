@@ -108,7 +108,7 @@ app.post('/updateLobby', async (req, res) => {
 });
 
 app.post('/deleteLobby', async (req, res) => {
-    await client.db("Haystation").collection("Users").deleteOne({"name":req.query.name});
+    await client.db("Haystation").collection("Lobbies").deleteOne({"name":req.query.name});
     res.end();
 });
 
