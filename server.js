@@ -123,6 +123,13 @@ app.get('*', (req, res) => {
     // Do nothing
 });
 
+app.get('/readAllGames', async (req, res) => {
+    res.send(JSON.stringify(
+        await client.db("Haystation").collection("Games").find().toArray()
+    ));
+});
+
+
 client.connect(err => {
     if (err) {
         console.error(err);
