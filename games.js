@@ -51,6 +51,9 @@ async function loadGames(){
         window.games = games;
         console.log(games);
     }
+    else{
+        console.log('failed to read all games');
+    }
 }
 
 const gameGrid = document.getElementById('gameGrid');
