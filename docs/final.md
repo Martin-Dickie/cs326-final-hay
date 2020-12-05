@@ -27,8 +27,38 @@ You can create an account on the website. We also offer the option to play with 
 #### **User Interface:**
 
 #### **APIs:**
+* /createUser, with the "name" and "status" parameters. This initializes a new user into the database with the specified name and status, and sets their initial friends list to an empty array.
+* /readUser, with the "name" parameter. This is a GET request to return the user data from the database for the specified user.
+* /updateUser, with the "user" parameter. This updates user specified in the body of the request, and replaces the data (other than name) with the data from the body.
+* /deleteUser, with the "name" parameter. This deletes the specified user.
+* /createLobby, with the "lobby" parameter. This initializes a new lobby into the database with the specified parameters from the request body (name, game, message, maxplayers), and sets their initial player count to 0 as well as their "users" array to an empty array (this will store the names of the users in the lobby)
+* /readLobby, with the "name" parameter. This simply reads the lobby with the specified name and returns with the json object representing the lobby
+* /readAllLobbies. This returns the entire collection of lobbies from the database
+* /updateLobby, with the "lobby" paramater. Operates identically to the /updateUser endpoint by specifying a lobby object and replacing the lobby data in the database with that name with the lobby query
+* /deleteLobby, with the "name" parameter. This deletes the specified lobby.
+* /readAllGames. This reads and returns all documents from the "Games" collection in the database.
 
 #### **Database:**
+The database is a MongoDB with the main database "Haystation" containing three collections: "Games", "Lobbies", and "Users". The "Users" and "Lobbies" collection's documents are specified as follows:
+```
+user: {
+  name: <string>,
+  status: <string>,
+  friends: Array[Object{name: <string>, status: <string>}]
+}
+
+lobby: {
+  name: <string>,
+  game: <string>,
+  message: <string>,
+  players: <integer>,
+  maxplayers: <integer>,
+  users: Array[<string>]
+}
+```
+The goal with these collections is specify all the information a user would need to know about a lobby before joining the lobby, and establish a relationship between users, themselves, and lobbies using the "users" and "friends" parameters. Note that only the names of the users are specified in the lobby documents, but the names AND statuses of users are specified in the friends parameter.
+
+The "Games" collection has documents populated from Steam's game data API, with one document per game.
 
 #### **URL Routes/Mappings:**
 
