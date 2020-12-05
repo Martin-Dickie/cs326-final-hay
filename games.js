@@ -28,7 +28,7 @@ async function loadGames() {
         console.log(games);
     }
     else {
-        console.log('failed to read all games');
+        console.log(allGameInfoResponse);
     }
 }
 
