@@ -54,9 +54,16 @@ app.post('/createUser', async (req, res) => {
 });
 
 app.post('/updateUser', async (req, res) => {
-    console.log(req.body);
-    await client.db("Haystation").collection("Users").deleteOne({"name":req.body.name});
-    await client.db("Haystation").collection("Users").insertOne(req.body);
+    await client.db("Haystation").collection("Users").findOneAndUpdate(
+        { "name": req.body.name },
+        {
+            $set: {
+                name: req.body.name,
+                status: req.body.status,
+                friends: req.body.friends
+            }
+        }
+    );
     res.end();
 });
 
@@ -101,9 +108,6 @@ app.post('/deleteLobby', async (req, res) => {
     res.end();
 });
 
-app.get('*', (req, res) => {
-    // Do nothing
-});
 
 app.get('/readAllGames', async (req, res) => {
     res.send(JSON.stringify(
@@ -111,7 +115,11 @@ app.get('/readAllGames', async (req, res) => {
     ));
 });
 
+app.get('*', (req, res) => {
+    // Do nothing
+});
 
+  
 client.connect(err => {
     if (err) {
         console.error(err);
