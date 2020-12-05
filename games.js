@@ -19,9 +19,10 @@ async function initialize() {
 async function loadGames() {
     const allGameInfoResponse = await fetch(url + '/readAllGames', {
         method: "GET",
-        headers: { 
+        headers: {
             "Content-type": "application/json; charset=UTF-8"
-        }});
+        }
+    });
     if (allGameInfoResponse.ok) {
         const games = await allGameInfoResponse.json();
         window.games = games;
@@ -62,8 +63,31 @@ function renderGames() {
             createLobbyButton.setAttribute('id', currentGame.name + ".lobby_button");
             createLobbyButton.setAttribute('type', 'button');
             createLobbyButton.classList.add("btn", "btn-secondary");
-            createLobbyButton.addEventListener('click', () => {
-                location.assign('https://floating-plateau-01072.herokuapp.com/'); // currently just links to lobbies, will have a post request
+            createLobbyButton.addEventListener('click', async function () {
+                const name = prompt("Name of Lobby?");
+                const game = currentGame.name;
+                const status = 'Waiting for more players...';
+                const players = 0;
+                const maxplayers = prompt("Maximum Number of Players?");
+
+                const newGame = {
+                    name: name,
+                    game: game,
+                    status: status,
+                    players: players,
+                    maxplayers: maxplayers,
+                    users: []
+                };
+
+                await fetch(url + "/createLobby", {
+                    method: "POST",
+                    body: JSON.stringify(newGame),
+                    headers: {
+                        "Content-type": "application/json; charset=UTF-8"
+                    }
+                });
+                location.assign('https://floating-plateau-01072.herokuapp.com/');
+                window.alert("Lobby created! Click in the browser to join");
             });
             createLobbyButton.innerText = "Create lobby";
 
