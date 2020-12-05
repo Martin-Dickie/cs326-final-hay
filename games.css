@@ -60,7 +60,7 @@ img {
     grid-template-columns: repeat(3, auto);
     grid-gap: 0px;
     width: 900px;
-    margin-left: 30%;
+    margin-left: 20%;
 }
 
 .gradient {
