@@ -27,6 +27,9 @@ async function getUserInfo(name) {
     }
 }
 
+if (getCurrentLobby(user) !== -1) {
+    getAndRenderCurrentLobby(document.getElementById('current-lobby-table'));
+}
 getAndRenderFriendInfo(document.getElementById('friend-table-body'));
 getAndRenderLobbyInfo(document.getElementById('lobby-browser-table'));
 
@@ -235,7 +238,13 @@ async function getAndRenderCurrentLobby(element) {
         element.firstChild.remove();
     }
     const lobby = await getCurrentLobby();
+    if (lobby === -1) {
+        // No lobby to leave
+        document.getElementById("lobby-title").innerText="Click Lobby to Join";
+        return;
+    }
     const users = lobby.users;
+    document.getElementById("lobby-title").innerText=lobby.name;
     for(let i = 0; i < users.length; i++) {
         // Add lobby to page
         const newRow = document.createElement('tr');
@@ -253,20 +262,24 @@ async function getAndRenderCurrentLobby(element) {
         newRow.addEventListener('click', async function() {
             if (confirm('Add '+ users[newRow.id] +' as a friend? '+newRow.id)) {
                 const me = await getUserInfo(user);
+                console.log(users[newRow.id]);
                 const newFriend = await getUserInfo(users[newRow.id]);
-                me.friends.push({
-                    name: newFriend.name,
-                    status: newFriend.status,
-                    _id: newFriend._id
+                console.log(me[0]);
+                me[0].friends.push({
+                    name: newFriend[0].name,
+                    status: newFriend[0].status,
+                    _id: newFriend[0]._id
                 });
                 await fetch(url + "/updateUser", {
                     method: "POST",
-                    body: JSON.stringify(me), 
+                    body: JSON.stringify(me[0]), 
                     headers: { 
                         "Content-type": "application/json; charset=UTF-8"
                     } 
                 });
                 await getAndRenderCurrentLobby(element);
+                await getAndRenderLobbyInfo(document.getElementById('lobby-browser-table'));
+                await getAndRenderCurrentLobby(document.getElementById('current-lobby-table'));
             }
         });
         element.appendChild(newRow);
@@ -281,7 +294,7 @@ async function getCurrentLobby() {
             "Content-type": "application/json; charset=UTF-8"
         }
     });
-    if (allLobbyInfoResponse.ok) { 
+    if (allLobbyInfoResponse.ok) {
         const allLobbyInfo = await allLobbyInfoResponse.json();
         for (let i = 0; i < allLobbyInfo.length; i++) {
             for (let j = 0; j < allLobbyInfo[i].users.length; j++) {

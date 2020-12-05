@@ -12,7 +12,7 @@ It always feels amazing to play games with friends! Who doesn't love a small hea
 
 We present to you, [**HayStation**](https://floating-plateau-01072.herokuapp.com/games).  
 
-We have created a website for you and your gaming buddies where you can invite them to play various games with you. 
+We have created a website for you and your gaming buddies where you can invite them to play various games with you. You can also add them as friends so it is easy connecting the next time. 
 
 You can create an account on the website. We also offer the option to play with other  gamers on the internet. Making a new friend never hurts!
 
