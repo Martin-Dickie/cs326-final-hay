@@ -50,3 +50,9 @@
     line-height: 20px;
     margin-left: 10px;
 }
+
+.btn {
+    border-color: black;
+    background-color: rgb(231, 58, 58);
+    color: black;
+}
