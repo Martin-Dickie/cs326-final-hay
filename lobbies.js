@@ -181,7 +181,7 @@ async function getAndRenderLobbyInfo(element) {
             const statusElement = document.createElement('td');
             statusElement.innerText = allLobbyInfo[i].status;
             const sizeElement = document.createElement('td');
-            sizeElement.innerText = allLobbyInfo[i].size+'/'+allLobbyInfo[i].maxplayers;
+            sizeElement.innerText = allLobbyInfo[i].players+'/'+allLobbyInfo[i].maxplayers;
 
             newRow.appendChild(idElement);
             newRow.appendChild(nameElement);
